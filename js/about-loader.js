@@ -11,12 +11,16 @@
   }
 
   var ABOUT_URL = window.location.origin + contentBasePath() + "content/about.md";
-  var DEFAULT_SINCE = "2026-10-03T00:00:00+08:00";
-  var DEFAULT_TIMER_LEAD = "想靠近你的第";
-  var DEFAULT_TIMER_LEAD_WAIT = "距离想靠近你的起点还有";
+  var DEFAULT_SINCE = "2022-07-16T00:00:00+08:00";
+  var DEFAULT_TIMER_LEAD = "这是 cv 和 Qing 相识的第";
+  var DEFAULT_TIMER_LEAD_WAIT = "距离相识还有";
+  var DEFAULT_SINCE_NEAR = "2026-10-03T00:00:00+08:00";
+  var DEFAULT_TIMER_LEAD_NEAR = "想靠近你的第";
+  var DEFAULT_TIMER_LEAD_NEAR_WAIT = "距离想靠近你的起点还有";
 
   var bodyEl = document.getElementById("about-body");
   var timerEl = document.getElementById("aboutTimer");
+  var timerNearEl = document.getElementById("aboutTimerNear");
   var aboutSection = document.getElementById("modalAbout");
 
   function escapeHtml(s) {
@@ -73,11 +77,14 @@
       .join("");
   }
 
-  function parseSince(meta) {
-    var raw = (meta && meta.since) || (aboutSection && aboutSection.getAttribute("data-since-fallback")) || DEFAULT_SINCE;
+  function parseSinceMs(meta, key, fallbackAttr, defaultIso) {
+    var raw =
+      (meta && meta[key]) ||
+      (aboutSection && aboutSection.getAttribute(fallbackAttr)) ||
+      defaultIso;
     var t = Date.parse(raw);
     if (Number.isNaN(t)) {
-      t = Date.parse(DEFAULT_SINCE);
+      t = Date.parse(defaultIso);
     }
     return t;
   }
@@ -104,8 +111,8 @@
     );
   }
 
-  function tick(sinceMs, leadElapsed, leadWait) {
-    if (!timerEl) return;
+  function tickInto(el, sinceMs, leadElapsed, leadWait) {
+    if (!el) return;
     var now = Date.now();
     var ahead = now < sinceMs;
     var diffSec = Math.floor(Math.abs(now - sinceMs) / 1000);
@@ -116,15 +123,32 @@
     var m = Math.floor(diffSec / 60);
     var s = diffSec % 60;
     var lead = ahead ? leadWait : leadElapsed;
-    timerEl.innerHTML = buildTimerHtml(lead, d, h, m, s);
+    el.innerHTML = buildTimerHtml(lead, d, h, m, s);
   }
 
-  function startTimer(sinceMs, meta) {
+  function tickPair(cfg) {
+    tickInto(timerEl, cfg.sinceMs, cfg.leadElapsed, cfg.leadWait);
+    tickInto(timerNearEl, cfg.sinceNearMs, cfg.leadNearElapsed, cfg.leadNearWait);
+  }
+
+  function startTimers(meta) {
+    var sinceMs = parseSinceMs(meta, "since", "data-since-fallback", DEFAULT_SINCE);
+    var sinceNearMs = parseSinceMs(meta, "since_near", "data-since-near-fallback", DEFAULT_SINCE_NEAR);
     var leadElapsed = (meta && meta.timer_lead) || DEFAULT_TIMER_LEAD;
     var leadWait = (meta && meta.timer_lead_wait) || DEFAULT_TIMER_LEAD_WAIT;
-    tick(sinceMs, leadElapsed, leadWait);
+    var leadNearElapsed = (meta && meta.timer_lead_near) || DEFAULT_TIMER_LEAD_NEAR;
+    var leadNearWait = (meta && meta.timer_lead_near_wait) || DEFAULT_TIMER_LEAD_NEAR_WAIT;
+    var cfg = {
+      sinceMs: sinceMs,
+      sinceNearMs: sinceNearMs,
+      leadElapsed: leadElapsed,
+      leadWait: leadWait,
+      leadNearElapsed: leadNearElapsed,
+      leadNearWait: leadNearWait,
+    };
+    tickPair(cfg);
     window.setInterval(function () {
-      tick(sinceMs, leadElapsed, leadWait);
+      tickPair(cfg);
     }, 1000);
   }
 
@@ -144,12 +168,10 @@
     .then(function (text) {
       var parsed = parseFrontMatter(text);
       renderBody(parsed.body);
-      var sinceMs = parseSince(parsed.meta);
-      startTimer(sinceMs, parsed.meta);
+      startTimers(parsed.meta);
     })
     .catch(function () {
       showFetchError();
-      var sinceMs = parseSince({});
-      startTimer(sinceMs, {});
+      startTimers({});
     });
 })();

@@ -47,7 +47,7 @@ python -m http.server 8080
 index.html
 .nojekyll           ← 关闭 GitHub Pages 的 Jekyll，保证 about.md 可加载
 giscus-config.js    ← Giscus 开关与 ID（按手册填写）
-content/about.md    ← 「关于」正文与计时器配置（日常只改这个即可）
+content/about.md    ← 「关于」正文与双行计时器配置（日常只改这个即可）
 css/styles.css
 js/app.js
 js/about-loader.js

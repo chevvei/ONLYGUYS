@@ -851,6 +851,10 @@ body.theme-girls .spin-switch__disc {
   border-top: 1px solid var(--border);
 }
 
+.about-timer + .about-timer {
+  margin-top: 1rem;
+}
+
 .about-timer {
   margin: 0;
   font-size: clamp(0.88rem, 2.5vw, 1rem);

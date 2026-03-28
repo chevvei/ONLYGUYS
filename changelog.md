@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-03-28（第十四次更新）
+
+- **关于页双计时器**：第一行恢复 **相识累计**（`since` + `timer_lead`，默认 2022-07-16）；第二行 **想靠近你**（`since_near` + `timer_lead_near` / `timer_lead_near_wait`，默认 2026-10-03，未到为倒计时）。去掉正文中关于计时规则的说明段；`index.html` 增加 `#aboutTimerNear` 与 **`data-since-near-fallback`**；`about-loader.js` 同一秒刷新两行；样式为两行计时增加间距。
+
 ## 2026-03-28（第十三次更新）
 
 - **关于页**：`content/about.md` 计时起点改为 **北京时间 2026-10-03 0 点**（`since`），引导语改为 **「想靠近你的第…天…时…分…秒」**（`timer_lead`）；新增 **`timer_lead_wait`**，在起点之前显示**倒计时**（默认「距离想靠近你的起点还有」）；正文补充说明与结尾煽情句；`index.html` 的 `data-since-fallback` 与 `about-loader.js` 默认配置同步。

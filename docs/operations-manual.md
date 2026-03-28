@@ -136,7 +136,7 @@
 |------|------|
 | `giscus-config.js` | Giscus 开关与仓库/分类 ID（由你在第四步填写）。 |
 | `js/giscus-loader.js` | 按配置动态插入 Giscus 脚本。 |
-| `index.html` | 评论区 DOM：`#giscus-mount`；「关于」弹出层：`#modalAbout`。 |
-| `content/about.md` | 「关于」正文与计时器配置；维护说明见 **`docs/editing-about.md`**。 |
+| `index.html` | 评论区 DOM：`#giscus-mount`；「关于」弹出层：`#modalAbout`（`data-since-fallback` / `data-since-near-fallback` 为两行计时的加载失败备用）。 |
+| `content/about.md` | 「关于」正文与**双行**计时器配置；维护说明见 **`docs/editing-about.md`**。 |
 
 更偏视觉方向的说明见 `docs/design.md`。

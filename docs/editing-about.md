@@ -17,13 +17,25 @@ content/about.md
 
 ### 1. 顶部配置区（YAML，在两条 `---` 之间）
 
+页面上有 **两行计时器**（每秒刷新），对应两套字段：
+
+**第一行（例如「相识」累计）**
+
 | 字段 | 含义 | 示例 |
 |------|------|------|
-| `since` | 计时起点（ISO 8601，建议带时区） | `2026-10-03T00:00:00+08:00` 表示 **北京时间 2026 年 10 月 3 日 0 点** |
-| `timer_lead` | **已到起点之后**的引导语（后接「x 天 x 时 x 分 x 秒」） | `想靠近你的第` |
-| `timer_lead_wait` | **未到起点之前**的引导语（后接距离起点还剩的「x 天 x 时 x 分 x 秒」） | `距离想靠近你的起点还有` |
+| `since` | 第一行计时起点（ISO 8601，建议带时区） | `2022-07-16T00:00:00+08:00` |
+| `timer_lead` | **已过起点**时的引导语（后接「x 天 x 时 x 分 x 秒」） | `这是 cv 和 Qing 相识的第` |
+| `timer_lead_wait` | **未到起点**时的引导语（后接还剩的「x 天 x 时 x 分 x 秒」）；一般相识日在过去，可不写 | `距离相识还有` |
 
-改 `since` 会改变计时；`timer_lead` / `timer_lead_wait` 只改句式。
+**第二行（例如「想靠近你」：未到 `since_near` 为倒计时，之后为累计）**
+
+| 字段 | 含义 | 示例 |
+|------|------|------|
+| `since_near` | 第二行计时起点 | `2026-10-03T00:00:00+08:00` |
+| `timer_lead_near` | **已过起点**时的引导语 | `想靠近你的第` |
+| `timer_lead_near_wait` | **未到起点**时的引导语 | `距离想靠近你的起点还有` |
+
+改 `since` / `since_near` 会改变数字；其余字段只改句式。
 
 ### 2. 正文（配置区下面的 Markdown）
 
@@ -37,9 +49,11 @@ content/about.md
 
 ```markdown
 ---
-since: 2026-10-03T00:00:00+08:00
-timer_lead: 想靠近你的第
-timer_lead_wait: 距离想靠近你的起点还有
+since: 2022-07-16T00:00:00+08:00
+timer_lead: 这是 cv 和 Qing 相识的第
+since_near: 2026-10-03T00:00:00+08:00
+timer_lead_near: 想靠近你的第
+timer_lead_near_wait: 距离想靠近你的起点还有
 ---
 
 本站由 **cv** 创作，记录关于我和我的女孩的一切。
@@ -69,7 +83,7 @@ GitHub Pages 默认会用 **Jekyll** 构建站点，可能导致 `content/about.
 
 ## 若加载失败
 
-页面会显示简短提示；计时器仍会使用 `index.html` 里 **`#modalAbout`** 上的 **`data-since-fallback`** 作为备用起点（与默认 `since` 保持一致即可）。请先对照上一节检查 **`.nojekyll`** 与文件是否已推送。
+页面会显示简短提示；两行计时器仍会使用 `index.html` 里 **`#modalAbout`** 上的 **`data-since-fallback`**、**`data-since-near-fallback`** 作为备用起点（与 `content/about.md` 里默认保持一致即可）。请先对照上一节检查 **`.nojekyll`** 与文件是否已推送。
 
 ---
 
@@ -77,5 +91,5 @@ GitHub Pages 默认会用 **Jekyll** 构建站点，可能导致 `content/about.
 
 | 文件 | 作用 |
 |------|------|
-| `js/about-loader.js` | 拉取 `content/about.md`、解析 front matter、渲染正文、每秒刷新计时器 |
-| `index.html` | 弹出层 `#modalAbout` 占位；`data-since-fallback` 为备用时间 |
+| `js/about-loader.js` | 拉取 `content/about.md`、解析 front matter、渲染正文、每秒刷新两行计时器 |
+| `index.html` | 弹出层 `#modalAbout`；`#aboutTimer` / `#aboutTimerNear`；两行备用时间属性 |
