@@ -137,6 +137,118 @@ body.modal-open {
   min-width: 0;
 }
 
+/* 陀螺左侧：文案 + 动态箭头指向开关 */
+.spin-switch-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  flex-shrink: 0;
+}
+
+.spin-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.2rem;
+  margin-right: -0.05rem;
+  color: var(--accent);
+  pointer-events: none;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.spin-hint__label {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(0.56rem, 2.4vw, 0.68rem);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+  text-align: right;
+  white-space: nowrap;
+  word-break: keep-all;
+  color: rgba(240, 244, 252, 0.88);
+  text-shadow: 0 0 12px var(--accent-glow), 0 1px 2px rgba(0, 0, 0, 0.6);
+  animation: spin-hint-label-pulse 2.2s ease-in-out infinite;
+}
+
+.spin-hint__arrow-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  filter: drop-shadow(0 0 8px var(--accent-glow));
+  animation: spin-hint-arrow-bounce 1.25s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  transform-origin: left center;
+}
+
+.spin-hint__arrow {
+  width: 32px;
+  height: 17px;
+  display: block;
+  overflow: visible;
+}
+
+.spin-hint__path {
+  animation: spin-hint-stroke-glow 1.25s ease-in-out infinite;
+}
+
+.spin-hint__path--head {
+  animation-delay: 0.08s;
+}
+
+@keyframes spin-hint-label-pulse {
+  0%,
+  100% {
+    opacity: 0.75;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes spin-hint-arrow-bounce {
+  0%,
+  100% {
+    transform: translateX(0) scaleX(1);
+  }
+  35% {
+    transform: translateX(5px) scaleX(1.12);
+  }
+  55% {
+    transform: translateX(9px) scaleX(1);
+  }
+}
+
+@keyframes spin-hint-stroke-glow {
+  0%,
+  100% {
+    stroke-opacity: 0.45;
+  }
+  50% {
+    stroke-opacity: 1;
+  }
+}
+
+@media (min-width: 768px) {
+  .spin-hint {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .spin-hint__label {
+    font-size: 0.68rem;
+    text-align: right;
+    line-height: 1.2;
+  }
+
+  .spin-hint__arrow-wrap {
+    animation-duration: 1.35s;
+  }
+}
+
 /* —— 陀螺形主题开关 —— */
 .spin-switch {
   position: relative;
@@ -443,6 +555,47 @@ body.theme-girls .spin-switch__disc {
   color: transparent;
   -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.12);
   padding: 0 0.02em;
+}
+
+.hero-sub {
+  margin: 1.6rem 0 0;
+  max-width: 34rem;
+  padding: 0 0.5rem;
+  line-height: 1.65;
+}
+
+.hero-sub__inner {
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif;
+  font-size: clamp(0.92rem, 2.35vw, 1.08rem);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: rgba(210, 216, 230, 0.72);
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.5),
+    0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.hero-sub__accent {
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: rgba(248, 250, 255, 0.94);
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.96) 0%, var(--accent) 48%, rgba(255, 255, 255, 0.9) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  animation: hero-sub-glow 10s ease-in-out infinite;
+}
+
+@keyframes hero-sub-glow {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 /* —— 全屏弹出卡片（发现 / 关于） —— */
@@ -844,6 +997,31 @@ body.theme-girls .spin-switch__disc {
   .spin-switch__hearts .heart-particle {
     animation: none !important;
     opacity: 0 !important;
+  }
+
+  .spin-hint__label {
+    animation: none !important;
+    opacity: 0.92 !important;
+    transform: none !important;
+  }
+
+  .spin-hint__arrow-wrap {
+    animation: none !important;
+    transform: translateX(4px) !important;
+  }
+
+  .spin-hint__path {
+    animation: none !important;
+    stroke-opacity: 0.95 !important;
+  }
+
+  .hero-sub__accent {
+    animation: none !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    color: var(--accent) !important;
+    filter: none !important;
   }
 
   .site-modal__panel {

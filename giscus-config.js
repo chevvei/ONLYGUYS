@@ -1,15 +1,14 @@
 /**
  * Giscus 评论配置（GitHub Discussions）
- * 1. 打开 https://giscus.app/zh-CN 按向导填写仓库信息
- * 2. 将生成的值填入下方并设 enabled: true
+ * 与 giscus.app 生成的 <script data-*> 一致；修改后推送即可生效。
  * 详见：docs/operations-manual.md
  */
 window.ONLYGUYS_GISCUS = {
-  enabled: false,
+  enabled: true,
   repo: "chevvei/ONLYGUYS",
-  repoId: "",
+  repoId: "R_kgDORzGiqQ",
   category: "General",
-  categoryId: "",
+  categoryId: "DIC_kwDORzGiqc4C5d-O",
   mapping: "pathname",
   strict: "0",
   reactionsEnabled: "1",

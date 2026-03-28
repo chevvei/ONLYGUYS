@@ -112,6 +112,7 @@
       if (!el) return;
       el.classList.remove("site-modal--visible");
       el.setAttribute("hidden", "");
+      el.hidden = true;
       el.setAttribute("aria-hidden", "true");
     });
     document.body.classList.remove("modal-open");
@@ -121,11 +122,10 @@
     if (!el) return;
     closeModals();
     el.removeAttribute("hidden");
+    el.hidden = false;
     el.setAttribute("aria-hidden", "false");
     document.body.classList.add("modal-open");
-    window.requestAnimationFrame(function () {
-      el.classList.add("site-modal--visible");
-    });
+    el.classList.add("site-modal--visible");
   }
 
   function openDiscoverModal() {
@@ -140,6 +140,7 @@
   document.querySelectorAll(".nav-modal-trigger[data-open-modal]").forEach(function (node) {
     node.addEventListener("click", function (e) {
       e.preventDefault();
+      e.stopPropagation();
       const which = node.getAttribute("data-open-modal");
       closeDrawer();
       if (which === "discover") openDiscoverModal();
@@ -149,7 +150,14 @@
 
   document.addEventListener("click", function (e) {
     const t = e.target;
-    if (t && t.closest && t.closest("[data-close-modal]")) {
+    if (!t || !t.closest) return;
+    const closer = t.closest("[data-close-modal]");
+    if (!closer) return;
+    if (
+      closer.classList.contains("site-modal__backdrop") ||
+      closer.classList.contains("site-modal__close")
+    ) {
+      e.preventDefault();
       closeModals();
     }
   });
