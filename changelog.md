@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-03-28（第十二次更新）
+
+- 陀螺提示改为 **悬浮胶囊**：绝对定位在按钮 **正下方**，**不参与顶栏 flex 宽度**（`spin-switch-wrap` 固定 44×44）；缩小字与箭头，箭头 **朝上** 指向陀螺；顶栏 `z-index` + `overflow: visible` 避免被主内容盖住。
+
+## 2026-03-28（第十一次更新）
+
+- **Giscus**：`giscus-config.js` 改为与 `giscus-loader.js` 同为 **`defer`**，并紧挨在 loader 之前，保证执行顺序；`giscus-loader.js` 对 `enabled` / `repoId` / `categoryId` 做规范化与 **`trim`**，未启用时在控制台输出 **`[giscus]`** 诊断说明。
+- `docs/operations-manual.md`：补充「仍显示评论区尚未启用」排查项。
+
 ## 2026-03-28（第十次更新）
 
 - 修复「点击陀螺有惊喜」在窄屏下被 `max-width: 5.2rem` 压成多行、末字单独成行的问题：去掉过窄限制，**整句单行**（`white-space: nowrap` + `word-break: keep-all`），字号用 `clamp` 略随屏宽缩放。

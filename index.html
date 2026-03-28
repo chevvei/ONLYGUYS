@@ -177,9 +177,10 @@
       </div>
     </div>
 
-    <script src="giscus-config.js"></script>
     <script src="js/app.js" defer></script>
     <script src="js/about-loader.js" defer></script>
+    <!-- 必须在 giscus-loader 之前执行，以写入 window.ONLYGUYS_GISCUS -->
+    <script src="giscus-config.js" defer></script>
     <script src="js/giscus-loader.js" defer></script>
   </body>
 </html>

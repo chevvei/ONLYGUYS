@@ -118,6 +118,8 @@ body.modal-open {
 
 /* —— 顶栏：OnlyFans 式 + 左上角陀螺开关 —— */
 .top-bar {
+  position: relative;
+  z-index: 40;
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
@@ -128,6 +130,7 @@ body.modal-open {
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
   box-shadow: 0 1px 0 var(--accent-soft), 0 12px 40px rgba(0, 0, 0, 0.4);
+  overflow: visible;
 }
 
 .top-bar-left {
@@ -135,55 +138,73 @@ body.modal-open {
   align-items: center;
   gap: 0.65rem;
   min-width: 0;
+  overflow: visible;
 }
 
-/* 陀螺左侧：文案 + 动态箭头指向开关 */
+/* 陀螺：仅按钮参与顶栏宽度；提示「浮动」在按钮正下方，不占导航横向空间 */
 .spin-switch-wrap {
-  display: flex;
-  align-items: center;
-  gap: 0.2rem;
+  position: relative;
+  width: 44px;
+  height: 44px;
   flex-shrink: 0;
 }
 
 .spin-hint {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  flex-direction: row;
+  align-items: center;
   justify-content: center;
-  gap: 0.2rem;
-  margin-right: -0.05rem;
+  gap: 0.28rem;
+  padding: 3px 9px 3px 8px;
+  max-width: none;
+  width: max-content;
   color: var(--accent);
   pointer-events: none;
-  flex-shrink: 0;
-  min-width: 0;
+  white-space: nowrap;
+  border-radius: 999px;
+  background: rgba(10, 11, 14, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(0, 0, 0, 0.2) inset,
+    0 0 24px var(--accent-soft);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .spin-hint__label {
   font-family: "Inter", system-ui, sans-serif;
-  font-size: clamp(0.56rem, 2.4vw, 0.68rem);
-  font-weight: 700;
-  letter-spacing: 0.03em;
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   line-height: 1.2;
-  text-align: right;
+  text-align: center;
   white-space: nowrap;
   word-break: keep-all;
-  color: rgba(240, 244, 252, 0.88);
-  text-shadow: 0 0 12px var(--accent-glow), 0 1px 2px rgba(0, 0, 0, 0.6);
+  color: rgba(235, 238, 245, 0.9);
+  text-shadow: 0 0 10px var(--accent-glow), 0 1px 2px rgba(0, 0, 0, 0.65);
   animation: spin-hint-label-pulse 2.2s ease-in-out infinite;
 }
 
 .spin-hint__arrow-wrap {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  filter: drop-shadow(0 0 8px var(--accent-glow));
-  animation: spin-hint-arrow-bounce 1.25s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-  transform-origin: left center;
+  justify-content: center;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 6px var(--accent-glow));
+  transform: rotate(-90deg);
+  transform-origin: center;
+  animation: spin-hint-arrow-nudge-up 1.25s cubic-bezier(0.45, 0, 0.55, 1) infinite;
 }
 
 .spin-hint__arrow {
-  width: 32px;
-  height: 17px;
+  width: 18px;
+  height: 10px;
   display: block;
   overflow: visible;
 }
@@ -199,25 +220,23 @@ body.modal-open {
 @keyframes spin-hint-label-pulse {
   0%,
   100% {
-    opacity: 0.75;
-    transform: scale(1);
+    opacity: 0.78;
   }
   50% {
     opacity: 1;
-    transform: scale(1.02);
   }
 }
 
-@keyframes spin-hint-arrow-bounce {
+@keyframes spin-hint-arrow-nudge-up {
   0%,
   100% {
-    transform: translateX(0) scaleX(1);
+    transform: rotate(-90deg) translateY(0);
   }
   35% {
-    transform: translateX(5px) scaleX(1.12);
+    transform: rotate(-90deg) translateY(-2px);
   }
   55% {
-    transform: translateX(9px) scaleX(1);
+    transform: rotate(-90deg) translateY(-4px);
   }
 }
 
@@ -232,20 +251,14 @@ body.modal-open {
 }
 
 @media (min-width: 768px) {
-  .spin-hint {
-    flex-direction: row;
-    align-items: center;
-    gap: 0.35rem;
-  }
-
   .spin-hint__label {
-    font-size: 0.68rem;
-    text-align: right;
-    line-height: 1.2;
+    font-size: 0.625rem;
+    letter-spacing: 0.025em;
   }
 
-  .spin-hint__arrow-wrap {
-    animation-duration: 1.35s;
+  .spin-hint__arrow {
+    width: 20px;
+    height: 11px;
   }
 }
 
@@ -268,6 +281,15 @@ body.modal-open {
 .spin-switch:hover {
   border-color: rgba(255, 255, 255, 0.22);
   color: #fff;
+}
+
+/* 覆盖 .spin-switch 的 position:relative，使顶栏宽度仅 44px */
+.spin-switch-wrap > .spin-switch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  margin: 0;
 }
 
 .spin-switch__glow {
@@ -1007,7 +1029,7 @@ body.theme-girls .spin-switch__disc {
 
   .spin-hint__arrow-wrap {
     animation: none !important;
-    transform: translateX(4px) !important;
+    transform: rotate(-90deg) translateY(-2px) !important;
   }
 
   .spin-hint__path {
