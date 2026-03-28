@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="OnlyGuys / OnlyGirls — 社交与创作者社区风格展示页（静态演示）" />
+    <title>OnlyGuys</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body class="theme-guys">
+    <div class="bg-layer" id="bgLayer" aria-hidden="true"></div>
+    <div class="bg-scrim" aria-hidden="true"></div>
+    <div class="bg-vignette" aria-hidden="true"></div>
+
+    <div class="shell">
+      <header class="top-bar">
+        <div class="top-bar-left">
+          <button
+            type="button"
+            class="spin-switch"
+            id="modeSpin"
+            aria-label="切换到 OnlyGirls 主题"
+            aria-pressed="false"
+            title="切换 OnlyGuys / OnlyGirls"
+          >
+            <span class="spin-switch__glow" aria-hidden="true"></span>
+            <span class="spin-switch__hearts" id="spinHearts" aria-hidden="true"></span>
+            <span class="spin-switch__disc" aria-hidden="true">
+              <svg class="spin-top-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <ellipse cx="20" cy="30" rx="10" ry="4" class="spin-top-svg__shadow" />
+                <path
+                  class="spin-top-svg__body"
+                  d="M20 8 L28 26 Q20 30 12 26 Z"
+                  stroke="currentColor"
+                  stroke-width="0.75"
+                  stroke-opacity="0.4"
+                  stroke-linejoin="round"
+                />
+                <ellipse cx="20" cy="10" rx="3" ry="2" class="spin-top-svg__tip" />
+              </svg>
+            </span>
+          </button>
+          <a class="brand-mark" id="brandMark" href="#">OnlyGuys</a>
+        </div>
+        <nav class="top-nav" aria-label="主导航">
+          <a href="#">发现</a>
+          <a href="#">创作者</a>
+          <a href="#">订阅</a>
+          <a href="#about">关于</a>
+        </nav>
+        <div class="top-actions">
+          <button type="button" class="btn btn-ghost">登录</button>
+          <button type="button" class="btn btn-primary">免费加入</button>
+        </div>
+        <button type="button" class="nav-toggle" id="navToggle" aria-label="打开菜单">
+          <span></span><span></span><span></span>
+        </button>
+      </header>
+
+      <div class="mobile-drawer" id="mobileDrawer" hidden>
+        <nav class="drawer-nav">
+          <a href="#">发现</a>
+          <a href="#">创作者</a>
+          <a href="#">订阅</a>
+          <a href="#about">关于</a>
+          <button type="button" class="btn btn-ghost btn-block">登录</button>
+          <button type="button" class="btn btn-primary btn-block">免费加入</button>
+        </nav>
+      </div>
+
+      <main class="page-main">
+        <div class="hero">
+          <p class="hero-eyebrow">创作者优先 · 订阅制社交</p>
+          <h1 class="hero-title" id="heroTitle"><span class="hero-title__text">OnlyGuys</span></h1>
+          <p class="hero-sub">
+            连接真实的人。支持你喜欢的创作者——风格灵感来自主流订阅平台界面，仅为外观演示。
+          </p>
+
+          <section class="panel" aria-label="背景设置">
+            <h2 class="panel-title">背景融合</h2>
+            <p class="panel-hint">
+              默认：OnlyGuys 使用 <code>cv.jpg</code>，OnlyGirls 使用 <code>Qing.jpg</code>。可上传图片临时覆盖；清除后恢复当前主题图。
+            </p>
+            <div class="panel-row">
+              <label class="file-label">
+                <input type="file" id="bgUpload" accept="image/*" class="visually-hidden" />
+                <span class="btn btn-upload">选择背景图</span>
+              </label>
+              <button type="button" class="btn btn-ghost btn-small" id="clearBg">清除背景</button>
+            </div>
+            <div class="panel-row panel-row-slider">
+              <label for="bgOpacity">背景透明度</label>
+              <input type="range" id="bgOpacity" min="0" max="100" value="38" />
+              <output id="opacityOut" for="bgOpacity">38%</output>
+            </div>
+          </section>
+        </div>
+
+        <section
+          class="about-section"
+          id="about"
+          aria-labelledby="about-heading"
+          data-since-fallback="2022-07-16T00:00:00+08:00"
+        >
+          <div class="about-inner">
+            <h2 class="about-heading" id="about-heading">关于</h2>
+            <div id="about-body" class="about-body"></div>
+            <div class="about-timer-block">
+              <p class="about-timer" id="aboutTimer"></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="comments-section" id="comments" aria-label="访客评论">
+          <h2 class="comments-heading">留言与讨论</h2>
+          <p class="comments-lead">访客使用 <strong>GitHub</strong> 账号登录即可发表评论（由 Giscus 托管，数据在仓库的 Discussions）。</p>
+          <div class="comments-panel">
+            <div id="giscus-mount" class="giscus-mount"></div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="footer-strip of-strip" aria-hidden="true"></div>
+        <div class="footer-inner">
+          <span class="footer-brand" id="footerBrand">OnlyGuys</span>
+          <span class="footer-meta">© 演示站点 · 静态托管</span>
+        </div>
+      </footer>
+    </div>
+
+    <script src="giscus-config.js"></script>
+    <script src="js/app.js" defer></script>
+    <script src="js/about-loader.js" defer></script>
+    <script src="js/giscus-loader.js" defer></script>
+  </body>
+</html>
