@@ -3,7 +3,7 @@ since: 2022-07-16T00:00:00+08:00
 timer_lead: 这是 cv 和 Qing 相识的第
 since_near: 2026-10-03T00:00:00+08:00
 timer_lead_near: 想靠近你的第
-timer_lead_near_wait: 距离想靠近你的起点还有
+timer_lead_near_wait: 这是想靠近你第
 ---
 
 本站由 **cv** 创作，记录关于我和我的女孩Qing的一切。
