@@ -7,6 +7,9 @@
   const brandMark = document.getElementById("brandMark");
   const heroTitleText = document.querySelector(".hero-title__text");
   const footerBrand = document.getElementById("footerBrand");
+  const modalDiscover = document.getElementById("modalDiscover");
+  const modalAbout = document.getElementById("modalAbout");
+  const discoverModalLead = document.getElementById("discoverModalLead");
 
   const STORAGE_THEME = "onlyguys_theme";
 
@@ -17,6 +20,13 @@
 
   function isGirlsTheme() {
     return document.body.classList.contains("theme-girls");
+  }
+
+  function refreshDiscoverLead() {
+    if (!discoverModalLead) return;
+    discoverModalLead.textContent = isGirlsTheme()
+      ? "发现当下的暧昧和girl"
+      : "发现当下的激情和Guy";
   }
 
   function setUiTexts(girls) {
@@ -32,6 +42,7 @@
         girls ? "切换到 OnlyGuys 主题" : "切换到 OnlyGirls 主题"
       );
     }
+    refreshDiscoverLead();
   }
 
   function burstHearts() {
@@ -91,6 +102,61 @@
     } catch (_) {}
     applyTheme(false, { burstHearts: false });
   }
+
+  function closeDrawer() {
+    if (mobileDrawer) mobileDrawer.setAttribute("hidden", "");
+  }
+
+  function closeModals() {
+    [modalDiscover, modalAbout].forEach(function (el) {
+      if (!el) return;
+      el.classList.remove("site-modal--visible");
+      el.setAttribute("hidden", "");
+      el.setAttribute("aria-hidden", "true");
+    });
+    document.body.classList.remove("modal-open");
+  }
+
+  function openModal(el) {
+    if (!el) return;
+    closeModals();
+    el.removeAttribute("hidden");
+    el.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+    window.requestAnimationFrame(function () {
+      el.classList.add("site-modal--visible");
+    });
+  }
+
+  function openDiscoverModal() {
+    refreshDiscoverLead();
+    openModal(modalDiscover);
+  }
+
+  function openAboutModal() {
+    openModal(modalAbout);
+  }
+
+  document.querySelectorAll(".nav-modal-trigger[data-open-modal]").forEach(function (node) {
+    node.addEventListener("click", function (e) {
+      e.preventDefault();
+      const which = node.getAttribute("data-open-modal");
+      closeDrawer();
+      if (which === "discover") openDiscoverModal();
+      else if (which === "about") openAboutModal();
+    });
+  });
+
+  document.addEventListener("click", function (e) {
+    const t = e.target;
+    if (t && t.closest && t.closest("[data-close-modal]")) {
+      closeModals();
+    }
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeModals();
+  });
 
   modeSpin?.addEventListener("click", function () {
     toggleTheme();

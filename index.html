@@ -49,10 +49,10 @@
           <a class="brand-mark" id="brandMark" href="#">OnlyGuys</a>
         </div>
         <nav class="top-nav" aria-label="主导航">
-          <a href="#">发现</a>
+          <a href="#" class="nav-modal-trigger" data-open-modal="discover">发现</a>
           <a href="#">创作者</a>
           <a href="#">订阅</a>
-          <a href="#about">关于</a>
+          <a href="#" class="nav-modal-trigger" data-open-modal="about">关于</a>
         </nav>
         <div class="top-actions">
           <button type="button" class="btn btn-ghost">登录</button>
@@ -65,10 +65,10 @@
 
       <div class="mobile-drawer" id="mobileDrawer" hidden>
         <nav class="drawer-nav">
-          <a href="#">发现</a>
+          <a href="#" class="nav-modal-trigger" data-open-modal="discover">发现</a>
           <a href="#">创作者</a>
           <a href="#">订阅</a>
-          <a href="#about">关于</a>
+          <a href="#" class="nav-modal-trigger" data-open-modal="about">关于</a>
           <button type="button" class="btn btn-ghost btn-block">登录</button>
           <button type="button" class="btn btn-primary btn-block">免费加入</button>
         </nav>
@@ -78,25 +78,7 @@
         <div class="hero">
           <p class="hero-eyebrow">创作者优先 · 订阅制社交</p>
           <h1 class="hero-title" id="heroTitle"><span class="hero-title__text">OnlyGuys</span></h1>
-          <p class="hero-sub">
-            连接真实的人。支持你喜欢的创作者——风格灵感来自主流订阅平台界面，仅为外观演示。
-          </p>
         </div>
-
-        <section
-          class="about-section"
-          id="about"
-          aria-labelledby="about-heading"
-          data-since-fallback="2022-07-16T00:00:00+08:00"
-        >
-          <div class="about-inner">
-            <h2 class="about-heading" id="about-heading">关于</h2>
-            <div id="about-body" class="about-body"></div>
-            <div class="about-timer-block">
-              <p class="about-timer" id="aboutTimer"></p>
-            </div>
-          </div>
-        </section>
 
         <section class="comments-section" id="comments" aria-label="访客评论">
           <h2 class="comments-heading">留言与讨论</h2>
@@ -114,6 +96,56 @@
           <span class="footer-meta">© 演示站点 · 静态托管</span>
         </div>
       </footer>
+    </div>
+
+    <!-- 弹出卡片：发现 -->
+    <div
+      class="site-modal"
+      id="modalDiscover"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="discover-modal-title"
+      aria-hidden="true"
+      hidden
+    >
+      <button type="button" class="site-modal__backdrop" tabindex="-1" aria-label="关闭" data-close-modal></button>
+      <div class="site-modal__sheet">
+        <div class="site-modal__panel site-modal__panel--discover">
+          <button type="button" class="site-modal__close" data-close-modal aria-label="关闭">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <p class="site-modal__eyebrow" id="discover-modal-title">发现</p>
+          <p class="discover-modal__lead" id="discoverModalLead">发现当下的激情和Guy</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 弹出卡片：关于 -->
+    <div
+      class="site-modal"
+      id="modalAbout"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="about-heading"
+      aria-hidden="true"
+      hidden
+      data-since-fallback="2022-07-16T00:00:00+08:00"
+    >
+      <button type="button" class="site-modal__backdrop" tabindex="-1" aria-label="关闭" data-close-modal></button>
+      <div class="site-modal__sheet">
+        <div class="site-modal__panel site-modal__panel--about">
+          <button type="button" class="site-modal__close" data-close-modal aria-label="关闭">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="about-inner about-inner--modal">
+            <h2 class="about-heading" id="about-heading">关于</h2>
+            <div id="about-body" class="about-body"></div>
+            <div class="about-timer-block">
+              <p class="about-timer" id="aboutTimer"></p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="giscus-config.js"></script>

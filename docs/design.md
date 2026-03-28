@@ -18,7 +18,7 @@
 | 背景 | 全屏摄影图 `cv.jpg` / `Qing.jpg`（主题切换），`fixed` + `opacity`；**scrim**（multiply 叠色）与 **vignette** 压暗边缘，中间透气，与 UI 融合。 |
 | 主标题字 | 与背景**同一 `--hero-photo`**，双层 `background-image`（渐变罩 + 照片）+ `background-clip: text`，与页面背景对齐。 |
 | 主题开关 | 左上角圆形 **陀螺** SVG，慢旋；OnlyGirls 态红粉描边/光晕、快旋，点击切换时 **爱心粒子** 外散。 |
-| 关于 | 独立 **`content/about.md`**（front matter + 正文），页面注入毛玻璃卡片；**相识计时器** 按 `since` 每秒刷新。 |
+| 发现 / 关于 | 点击顶栏或抽屉链接后 **弹出层**（磨砂遮罩 + 渐变顶线卡片）；发现文案随 Guys/Girls 主题切换；关于内容仍来自 **`content/about.md`** + 计时器。 |
 | 内容区 | 半透明毛玻璃面板（`backdrop-filter`），避免背景图干扰控件阅读。 |
 | 评论区 | 与主面板一致的圆角容器，便于嵌入 Giscus（`dark` 主题）。 |
 | 页脚 | **细青蓝渐变线** + 深色底栏，与顶栏色系一致。 |

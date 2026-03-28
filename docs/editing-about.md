@@ -67,7 +67,7 @@ GitHub Pages 默认会用 **Jekyll** 构建站点，可能导致 `content/about.
 
 ## 若加载失败
 
-页面会显示简短提示；计时器仍会使用 `index.html` 里 `section#about` 上的 **`data-since-fallback`** 作为备用起点（与默认 `since` 保持一致即可）。请先对照上一节检查 **`.nojekyll`** 与文件是否已推送。
+页面会显示简短提示；计时器仍会使用 `index.html` 里 **`#modalAbout`** 上的 **`data-since-fallback`** 作为备用起点（与默认 `since` 保持一致即可）。请先对照上一节检查 **`.nojekyll`** 与文件是否已推送。
 
 ---
 
@@ -76,4 +76,4 @@ GitHub Pages 默认会用 **Jekyll** 构建站点，可能导致 `content/about.
 | 文件 | 作用 |
 |------|------|
 | `js/about-loader.js` | 拉取 `content/about.md`、解析 front matter、渲染正文、每秒刷新计时器 |
-| `index.html` | `#about` 区块占位；`data-since-fallback` 为备用时间 |
+| `index.html` | 弹出层 `#modalAbout` 占位；`data-since-fallback` 为备用时间 |

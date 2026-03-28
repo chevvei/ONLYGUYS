@@ -16,7 +16,7 @@
 
   var bodyEl = document.getElementById("about-body");
   var timerEl = document.getElementById("aboutTimer");
-  var aboutSection = document.getElementById("about");
+  var aboutSection = document.getElementById("modalAbout");
 
   function escapeHtml(s) {
     return String(s)
