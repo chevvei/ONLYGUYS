@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-03-28（第十五次更新）
+
+- **评论区**：去掉「访客使用 GitHub 账号登录…Giscus…Discussions」说明段，版面更简洁；删除 `.comments-lead` 样式，标题与面板间距由 `.comments-heading` 下边距承担。
+
 ## 2026-03-28（第十四次更新）
 
 - **关于页双计时器**：第一行恢复 **相识累计**（`since` + `timer_lead`，默认 2022-07-16）；第二行 **想靠近你**（`since_near` + `timer_lead_near` / `timer_lead_near_wait`，默认 2026-10-03，未到为倒计时）。去掉正文中关于计时规则的说明段；`index.html` 增加 `#aboutTimerNear` 与 **`data-since-near-fallback`**；`about-loader.js` 同一秒刷新两行；样式为两行计时增加间距。
