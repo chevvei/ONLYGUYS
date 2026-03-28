@@ -11,8 +11,9 @@
   }
 
   var ABOUT_URL = window.location.origin + contentBasePath() + "content/about.md";
-  var DEFAULT_SINCE = "2022-07-16T00:00:00+08:00";
-  var DEFAULT_TIMER_LEAD = "这是 cv 和 Qing 相识的第";
+  var DEFAULT_SINCE = "2026-10-03T00:00:00+08:00";
+  var DEFAULT_TIMER_LEAD = "想靠近你的第";
+  var DEFAULT_TIMER_LEAD_WAIT = "距离想靠近你的起点还有";
 
   var bodyEl = document.getElementById("about-body");
   var timerEl = document.getElementById("aboutTimer");
@@ -103,24 +104,27 @@
     );
   }
 
-  function tick(sinceMs, leadText) {
+  function tick(sinceMs, leadElapsed, leadWait) {
     if (!timerEl) return;
     var now = Date.now();
-    var diffSec = Math.max(0, Math.floor((now - sinceMs) / 1000));
+    var ahead = now < sinceMs;
+    var diffSec = Math.floor(Math.abs(now - sinceMs) / 1000);
     var d = Math.floor(diffSec / 86400);
     diffSec %= 86400;
     var h = Math.floor(diffSec / 3600);
     diffSec %= 3600;
     var m = Math.floor(diffSec / 60);
     var s = diffSec % 60;
-    timerEl.innerHTML = buildTimerHtml(leadText, d, h, m, s);
+    var lead = ahead ? leadWait : leadElapsed;
+    timerEl.innerHTML = buildTimerHtml(lead, d, h, m, s);
   }
 
   function startTimer(sinceMs, meta) {
-    var lead = (meta && meta.timer_lead) || DEFAULT_TIMER_LEAD;
-    tick(sinceMs, lead);
+    var leadElapsed = (meta && meta.timer_lead) || DEFAULT_TIMER_LEAD;
+    var leadWait = (meta && meta.timer_lead_wait) || DEFAULT_TIMER_LEAD_WAIT;
+    tick(sinceMs, leadElapsed, leadWait);
     window.setInterval(function () {
-      tick(sinceMs, lead);
+      tick(sinceMs, leadElapsed, leadWait);
     }, 1000);
   }
 
