@@ -6,7 +6,7 @@
  */
 window.ONLYGUYS_GISCUS = {
   enabled: false,
-  repo: "你的GitHub用户名/仓库名",
+  repo: "chevvei/ONLYGUYS",
   repoId: "",
   category: "General",
   categoryId: "",

@@ -25,6 +25,8 @@ python -m http.server 8080
 
 **无需安装 Node、无需后端。** 若页面空白，检查仓库根目录是否有 `index.html`。
 
+仓库根目录需包含 **`.nojekyll`**（空文件即可），这样 GitHub Pages **不会用 Jekyll 处理站点**，`content/about.md` 才能被正常 `fetch` 到。
+
 ## 资源文件
 
 请将 **`cv.jpg`**（OnlyGuys 主题）与 **`Qing.jpg`**（OnlyGirls 主题）放在仓库**根目录**（与 `index.html` 同级），以便 `css/styles.css` 中的 `url("../cv.jpg")` 等路径在 GitHub Pages 上正确加载。
@@ -32,8 +34,7 @@ python -m http.server 8080
 ## 功能说明
 
 - 首页超大标题 **OnlyGuys / OnlyGirls**（Bebas Neue），点击左上角**陀螺开关**切换主题；陀螺默认慢旋，切入 Girls 时变红、加速旋转并散发爱心。
-- 整体视觉**偏 OnlyFans 系**；全屏摄影背景与标题字通过同一图源 + 叠色融合。
-- **上传背景图**：仅在本机浏览器中通过 `FileReader` 预览；**透明度**滑块控制整层背景不透明度（透明度可写入 `localStorage`，大图不持久化）。
+- 整体视觉**偏 OnlyFans 系**；全屏摄影背景与标题字通过同一图源 + 叠色融合（背景仅由主题切换 `cv.jpg` / `Qing.jpg`，访客不能改服务器上的图）。
 - **访客评论**：集成 **Giscus**（GitHub Discussions）。需在 `giscus-config.js` 中填写仓库信息并设 `enabled: true`。
 
 ## 操作手册（部署与评论，一步一步）
@@ -44,6 +45,7 @@ python -m http.server 8080
 
 ```
 index.html
+.nojekyll           ← 关闭 GitHub Pages 的 Jekyll，保证 about.md 可加载
 giscus-config.js    ← Giscus 开关与 ID（按手册填写）
 content/about.md    ← 「关于」正文与计时器配置（日常只改这个即可）
 css/styles.css

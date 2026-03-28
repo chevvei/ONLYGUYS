@@ -125,7 +125,7 @@
 | 无样式 | CSS 路径错误；或用了子路径但未改资源前缀（本站为相对路径，一般无此问题）。 |
 | Giscus 不显示 | `enabled` 未 `true`；`repoId`/`categoryId` 错误；未安装 Giscus App；仓库未开 Discussions。 |
 | 评论发不出去 | 未登录 GitHub；无仓库讨论权限；分类被删或改名后未更新配置。 |
-| 「关于」正文不显示 / 提示无法加载 | 未把 `content/about.md` 推送到仓库；或本地用 `file://` 打开页面（需 `npx serve .` 等静态服务）。 |
+| 「关于」正文不显示 / 提示无法加载 | 未把 `content/about.md` 推送到仓库；本地用 `file://` 打开（需 `npx serve .`）；或缺少根目录 **`.nojekyll`** 导致 GitHub Pages 的 Jekyll 未按原样提供该文件。 |
 
 ---
 

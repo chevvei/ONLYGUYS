@@ -1,9 +1,5 @@
 (function () {
   const bgLayer = document.getElementById("bgLayer");
-  const bgUpload = document.getElementById("bgUpload");
-  const bgOpacity = document.getElementById("bgOpacity");
-  const opacityOut = document.getElementById("opacityOut");
-  const clearBg = document.getElementById("clearBg");
   const navToggle = document.getElementById("navToggle");
   const mobileDrawer = document.getElementById("mobileDrawer");
   const modeSpin = document.getElementById("modeSpin");
@@ -12,35 +8,10 @@
   const heroTitleText = document.querySelector(".hero-title__text");
   const footerBrand = document.getElementById("footerBrand");
 
-  const STORAGE_OPACITY = "onlyguys_bg_opacity";
   const STORAGE_THEME = "onlyguys_theme";
 
-  let customBgOverride = false;
-
-  function setOpacityPercent(percent) {
-    const p = Math.max(0, Math.min(100, Number(percent)));
-    const dec = p / 100;
-    document.documentElement.style.setProperty("--hero-opacity", String(dec));
-    if (opacityOut) opacityOut.textContent = `${Math.round(p)}%`;
-    if (bgOpacity) bgOpacity.value = String(Math.round(p));
-    try {
-      localStorage.setItem(STORAGE_OPACITY, String(Math.round(p)));
-    } catch (_) {}
-  }
-
-  function applySavedOpacity() {
-    try {
-      const saved = localStorage.getItem(STORAGE_OPACITY);
-      if (saved != null && !Number.isNaN(Number(saved))) {
-        setOpacityPercent(saved);
-        return;
-      }
-    } catch (_) {}
-    setOpacityPercent(bgOpacity ? bgOpacity.value : 38);
-  }
-
   function applyThemeBackground() {
-    if (!bgLayer || customBgOverride) return;
+    if (!bgLayer) return;
     bgLayer.style.removeProperty("background-image");
   }
 
@@ -121,35 +92,10 @@
     applyTheme(false, { burstHearts: false });
   }
 
-  bgUpload?.addEventListener("change", function () {
-    const file = this.files && this.files[0];
-    if (!file || !file.type.startsWith("image/")) return;
-    const reader = new FileReader();
-    reader.onload = function () {
-      const url = reader.result;
-      if (typeof url === "string" && bgLayer) {
-        customBgOverride = true;
-        bgLayer.style.backgroundImage = `url(${JSON.stringify(url)})`;
-      }
-    };
-    reader.readAsDataURL(file);
-  });
-
-  clearBg?.addEventListener("click", function () {
-    customBgOverride = false;
-    if (bgUpload) bgUpload.value = "";
-    applyThemeBackground();
-  });
-
-  bgOpacity?.addEventListener("input", function () {
-    setOpacityPercent(this.value);
-  });
-
   modeSpin?.addEventListener("click", function () {
     toggleTheme();
   });
 
-  applySavedOpacity();
   loadSavedTheme();
 
   navToggle?.addEventListener("click", function () {

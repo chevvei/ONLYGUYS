@@ -127,8 +127,9 @@
   function showFetchError() {
     if (!bodyEl) return;
     bodyEl.innerHTML =
-      "<p class=\"about-fallback\">无法加载 <code>content/about.md</code>。请使用本地静态服务器预览（例如 <code>npx serve .</code>），或将站点部署到 GitHub Pages 后再试。</p>" +
-      "<p class=\"about-fallback about-fallback--hint\">编辑正文请打开仓库里的 <code>content/about.md</code>，说明见 <code>docs/editing-about.md</code>。</p>";
+      "<p class=\"about-fallback\">无法加载 <code>content/about.md</code>。若你是本地双击打开的页面，请用 <code>npx serve .</code> 启动静态服务后再试。</p>" +
+      "<p class=\"about-fallback about-fallback--hint\">若已部署到 GitHub Pages：请确认仓库根目录有 <code>content/about.md</code>，且根目录存在 <code>.nojekyll</code> 文件（避免 Jekyll 吞掉该文件），然后重新推送并等待几分钟。</p>" +
+      "<p class=\"about-fallback about-fallback--hint\">编辑正文：仓库内 <code>content/about.md</code>，说明见 <code>docs/editing-about.md</code>。</p>";
   }
 
   fetch(ABOUT_URL)

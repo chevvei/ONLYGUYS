@@ -25,8 +25,8 @@
 
 ## 技术约束（GitHub Pages）
 
-- 无自建服务端：背景图仅存于当前浏览器（Data URL），刷新后需重新上传。
-- 透明度百分比可写入 `localStorage`。
+- 无自建服务端：背景仅为仓库内 **`cv.jpg` / `Qing.jpg`**，由主题切换；访客不能改服务器上的资源。
+- 「关于」通过 `fetch` 读取 **`content/about.md`**；根目录 **`.nojekyll`** 用于关闭 Jekyll，保证该文件可被访问。
 - 评论通过 **Giscus** 走 GitHub Discussions，配置见 `docs/operations-manual.md`。
 
 ## 后续可扩展（非本次范围）

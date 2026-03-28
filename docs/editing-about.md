@@ -55,13 +55,19 @@ timer_lead: 这是 cv 和 Qing 相识的第
 npx --yes serve .
 ```
 
-部署到 **GitHub Pages** 后，一般可正常读取 `content/about.md`。
+## GitHub Pages 与 `.nojekyll`
+
+GitHub Pages 默认会用 **Jekyll** 构建站点，可能导致 `content/about.md` **无法按原路径访问**，页面会显示「无法加载」。
+
+本仓库在根目录放了空的 **`.nojekyll`** 文件，用于**关闭 Jekyll**，让 `content/about.md` 作为静态文件被访问。推送时请勿删掉该文件。
+
+部署后若仍失败，确认 **`content/about.md` 已提交** 并等待 Pages 刷新几分钟。
 
 ---
 
 ## 若加载失败
 
-页面会显示简短提示；计时器仍会使用 `index.html` 里 `section#about` 上的 **`data-since-fallback`** 作为备用起点（与默认 `since` 保持一致即可）。
+页面会显示简短提示；计时器仍会使用 `index.html` 里 `section#about` 上的 **`data-since-fallback`** 作为备用起点（与默认 `since` 保持一致即可）。请先对照上一节检查 **`.nojekyll`** 与文件是否已推送。
 
 ---
 
