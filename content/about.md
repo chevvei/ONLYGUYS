@@ -1,11 +1,3 @@
-<!--
- * @Author: cv 821528331@qq.com
- * @Date: 2026-03-28 18:53:25
- * @LastEditors: cv 821528331@qq.com
- * @LastEditTime: 2026-03-29 13:55:31
- * @FilePath: \onlyGuys\content\about.md
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
--->
 ---
 since: 2022-07-16T00:00:00+08:00
 timer_lead: 这是 cv 和 Qing 相识的第
