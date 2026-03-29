@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&family=Noto+Serif+SC:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&family=Noto+Serif+SC:wght@400;500;600;700&family=ZCOOL+XiaoWei&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/styles.css" />
@@ -89,7 +89,7 @@
           <a href="#" class="nav-modal-trigger" data-open-modal="discover">发现</a>
           <a href="#" class="nav-modal-trigger" data-open-modal="creators">创作者</a>
           <a href="#">订阅</a>
-          <a href="#" class="nav-modal-trigger" data-open-modal="support">众筹看世界</a>
+          <a href="#" class="nav-modal-trigger" data-open-modal="support">看世界</a>
           <a href="#" class="nav-modal-trigger" data-open-modal="about">关于</a>
         </nav>
         <div class="top-actions">
@@ -106,7 +106,7 @@
           <a href="#" class="nav-modal-trigger" data-open-modal="discover">发现</a>
           <a href="#" class="nav-modal-trigger" data-open-modal="creators">创作者</a>
           <a href="#">订阅</a>
-          <a href="#" class="nav-modal-trigger" data-open-modal="support">众筹看世界</a>
+          <a href="#" class="nav-modal-trigger" data-open-modal="support">看世界</a>
           <a href="#" class="nav-modal-trigger" data-open-modal="about">关于</a>
           <button type="button" class="btn btn-ghost btn-block">登录</button>
           <button type="button" class="btn btn-primary btn-block">免费加入</button>
@@ -161,7 +161,7 @@
       </div>
     </div>
 
-    <!-- 弹出卡片：众筹看世界（收款码等资源见 assets/support/） -->
+    <!-- 弹出卡片：看世界（收款码等资源见 assets/support/） -->
     <div
       class="site-modal"
       id="modalSupport"
@@ -177,7 +177,55 @@
           <button type="button" class="site-modal__close" data-close-modal aria-label="关闭">
             <span aria-hidden="true">&times;</span>
           </button>
-          <p class="site-modal__eyebrow" id="support-modal-title">众筹看世界</p>
+          <p class="site-modal__eyebrow" id="support-modal-title">看世界</p>
+          <p class="support-slogan" aria-label="标语">
+            <span class="support-slogan__line support-slogan__line--1">世界有你才很大，</span>
+            <span class="support-slogan__line support-slogan__line--2">我想我们得去码头整点薯条！</span>
+          </p>
+          <section class="support-travel" aria-labelledby="travelMapHeading">
+            <h3 class="support-travel__heading" id="travelMapHeading">看世界打卡</h3>
+            <div class="travel-map" id="travelMapRoot">
+              <div class="travel-map__viewport">
+                <div
+                  class="travel-map__layer travel-map__layer--china"
+                  id="travelMapChinaHost"
+                  role="img"
+                  aria-label="中国地图与已点亮城市"
+                ></div>
+                <div
+                  class="travel-map__layer travel-map__layer--world"
+                  id="travelMapWorldHost"
+                  hidden
+                  role="img"
+                  aria-label="球形地球与已点亮城市，可旋转与缩放视距"
+                ></div>
+              </div>
+              <p class="travel-map__hint" id="travelMapHint">滚轮缩放 · 拖拽平移 · 双击重置视图</p>
+              <p class="travel-map__legend" id="travelMapLegend"></p>
+              <div class="travel-map__toggle travel-map__toggle--lux" role="tablist" aria-label="地图范围">
+                <button
+                  type="button"
+                  class="travel-map__tab travel-map__tab--lux is-active"
+                  role="tab"
+                  aria-selected="true"
+                  data-map="china"
+                >
+                  <span class="travel-map__tab-title">中国</span>
+                  <span class="travel-map__tab-sub" aria-hidden="true">China</span>
+                </button>
+                <button
+                  type="button"
+                  class="travel-map__tab travel-map__tab--lux"
+                  role="tab"
+                  aria-selected="false"
+                  data-map="world"
+                >
+                  <span class="travel-map__tab-title">世界</span>
+                  <span class="travel-map__tab-sub" aria-hidden="true">Earth</span>
+                </button>
+              </div>
+            </div>
+          </section>
           <p class="support-modal__lead">若你愿意支持我们继续记录与出发，可用微信扫码。</p>
           <div class="support-modal__qr-wrap">
             <img
@@ -312,6 +360,7 @@
 
     <script src="js/gallery-carousel.js" defer></script>
     <script src="js/app.js" defer></script>
+    <script src="js/travel-map.js" defer></script>
     <!-- 与 content/about.md 保持一致；file:// 双击打开或 fetch 失败时使用 -->
     <script type="text/plain" id="about-md-fallback">
 ---

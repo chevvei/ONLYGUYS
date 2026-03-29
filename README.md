@@ -52,13 +52,15 @@ index.html
 onlyGuysPic/        ← 含 cv.jpg（Guys 底图 + 可轮播）
 onlyGirlsPic/       ← 含 Qing.jpg（Girls 底图 + 可轮播）
 creators/           ← 「创作者」弹层头像（cvcv.jpg、QingQing.jpg）
-assets/support/     ← 「众筹看世界」微信收款码等（默认 wechat-pay.jpg，见目录内 README）
+assets/support/     ← 「看世界」微信收款码等（默认 wechat-pay.jpg，见目录内 README）
+assets/travel/      ← 可选：将来放 GeoJSON 等地图数据（见 README）
 giscus-config.js    ← Giscus 开关与 ID（按手册填写）
 content/about.md    ← 「关于」正文与双行计时器配置（部署后以此为准；请与 index 内 #about-md-fallback 同步）
 css/styles.css
 js/app.js
 js/gallery-manifest.json   ← 两主题轮播文件列表
 js/gallery-carousel.js
+js/travel-map.js     ← 「看世界」弹层内「看世界打卡」地图（中国/世界切换、城市经纬度）
 js/about-loader.js
 js/giscus-loader.js
 docs/
