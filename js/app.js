@@ -8,6 +8,7 @@
   const heroTitleText = document.querySelector(".hero-title__text");
   const footerBrand = document.getElementById("footerBrand");
   const modalDiscover = document.getElementById("modalDiscover");
+  const modalCreators = document.getElementById("modalCreators");
   const modalAbout = document.getElementById("modalAbout");
   const discoverModalLead = document.getElementById("discoverModalLead");
 
@@ -111,7 +112,7 @@
   }
 
   function closeModals() {
-    [modalDiscover, modalAbout].forEach(function (el) {
+    [modalDiscover, modalCreators, modalAbout].forEach(function (el) {
       if (!el) return;
       el.classList.remove("site-modal--visible");
       el.setAttribute("hidden", "");
@@ -136,6 +137,10 @@
     openModal(modalDiscover);
   }
 
+  function openCreatorsModal() {
+    openModal(modalCreators);
+  }
+
   function openAboutModal() {
     openModal(modalAbout);
   }
@@ -147,6 +152,7 @@
       const which = node.getAttribute("data-open-modal");
       closeDrawer();
       if (which === "discover") openDiscoverModal();
+      else if (which === "creators") openCreatorsModal();
       else if (which === "about") openAboutModal();
     });
   });

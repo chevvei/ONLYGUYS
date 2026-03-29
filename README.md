@@ -49,6 +49,7 @@ index.html
 .nojekyll           ← 关闭 GitHub Pages 的 Jekyll，保证 about.md 可加载
 onlyGuysPic/        ← 含 cv.jpg（Guys 底图 + 可轮播）
 onlyGirlsPic/       ← 含 Qing.jpg（Girls 底图 + 可轮播）
+creators/           ← 「创作者」弹层头像（cvcv.jpg、QingQing.jpg）
 giscus-config.js    ← Giscus 开关与 ID（按手册填写）
 content/about.md    ← 「关于」正文与双行计时器配置（日常只改这个即可）
 css/styles.css

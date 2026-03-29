@@ -137,7 +137,7 @@
 |------|------|
 | `giscus-config.js` | Giscus 开关与仓库/分类 ID（由你在第四步填写）。 |
 | `js/giscus-loader.js` | 按配置动态插入 Giscus 脚本。 |
-| `index.html` | 评论区 `#giscus-mount`；关于 `#modalAbout`（`data-since-fallback` / `data-since-near-fallback`）；图库 `#galleryCarousel`。 |
+| `index.html` | 评论区 `#giscus-mount`；关于 `#modalAbout`；创作者 `#modalCreators`；图库 `#galleryCarousel`。 |
 | `js/gallery-manifest.json` | 两主题轮播文件列表；说明见 **`docs/gallery-media.md`**。 |
 | `content/about.md` | 「关于」正文与**双行**计时器配置；维护说明见 **`docs/editing-about.md`**。 |
 

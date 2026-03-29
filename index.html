@@ -87,7 +87,7 @@
         </div>
         <nav class="top-nav" aria-label="主导航">
           <a href="#" class="nav-modal-trigger" data-open-modal="discover">发现</a>
-          <a href="#">创作者</a>
+          <a href="#" class="nav-modal-trigger" data-open-modal="creators">创作者</a>
           <a href="#">订阅</a>
           <a href="#" class="nav-modal-trigger" data-open-modal="about">关于</a>
         </nav>
@@ -103,7 +103,7 @@
       <div class="mobile-drawer" id="mobileDrawer" hidden>
         <nav class="drawer-nav">
           <a href="#" class="nav-modal-trigger" data-open-modal="discover">发现</a>
-          <a href="#">创作者</a>
+          <a href="#" class="nav-modal-trigger" data-open-modal="creators">创作者</a>
           <a href="#">订阅</a>
           <a href="#" class="nav-modal-trigger" data-open-modal="about">关于</a>
           <button type="button" class="btn btn-ghost btn-block">登录</button>
@@ -155,6 +155,91 @@
           </button>
           <p class="site-modal__eyebrow" id="discover-modal-title">发现</p>
           <p class="discover-modal__lead" id="discoverModalLead">发现当下的激情和Guy</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 弹出卡片：创作者 -->
+    <div
+      class="site-modal"
+      id="modalCreators"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="creators-modal-title"
+      aria-hidden="true"
+      hidden
+    >
+      <button type="button" class="site-modal__backdrop" tabindex="-1" aria-label="关闭" data-close-modal></button>
+      <div class="site-modal__sheet">
+        <div class="site-modal__panel site-modal__panel--creators">
+          <button type="button" class="site-modal__close" data-close-modal aria-label="关闭">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <p class="site-modal__eyebrow" id="creators-modal-title">创作者</p>
+          <div class="creators-hero-text creators-hero-text--under-title">
+            <p class="creators-tagline">
+              <span class="creators-tagline__cv">CV</span><span class="creators-tagline__glue"> 和 </span><span class="creators-tagline__qing">Qing</span><span class="creators-tagline__glue"> 正在经历的</span><span class="creators-tagline__tail">21 世纪开放世界</span>
+            </p>
+          </div>
+          <div class="creators-layout">
+            <article class="creators-card creators-card--cv">
+              <div class="creators-card__ring-wrap">
+                <div class="creators-card__hearts creators-card__hearts--blue" aria-hidden="true">
+                  <span style="--rot: 0deg; --d: 0s"></span>
+                  <span style="--rot: 60deg; --d: 0.2s"></span>
+                  <span style="--rot: 120deg; --d: 0.4s"></span>
+                  <span style="--rot: 180deg; --d: 0.6s"></span>
+                  <span style="--rot: 240deg; --d: 0.8s"></span>
+                  <span style="--rot: 300deg; --d: 1s"></span>
+                </div>
+                <div class="creators-card__ring">
+                  <img
+                    class="creators-card__avatar"
+                    src="creators/cvcv.jpg"
+                    width="112"
+                    height="112"
+                    alt=""
+                    decoding="async"
+                  />
+                </div>
+              </div>
+              <span class="creators-card__name creators-card__name--cv">CV</span>
+              <span class="creators-card__id">创作者编号 000</span>
+            </article>
+            <div class="creators-mid">
+              <div class="creators-bridge" aria-hidden="true">
+                <span class="creators-bridge__disk"></span>
+                <span class="creators-bridge__wave creators-bridge__wave--blue"></span>
+                <span class="creators-bridge__wave creators-bridge__wave--blue creators-bridge__wave--blue-trail"></span>
+                <span class="creators-bridge__wave creators-bridge__wave--red"></span>
+                <span class="creators-bridge__wave creators-bridge__wave--red creators-bridge__wave--red-trail"></span>
+              </div>
+            </div>
+            <article class="creators-card creators-card--qing">
+              <div class="creators-card__ring-wrap">
+                <div class="creators-card__hearts creators-card__hearts--pink" aria-hidden="true">
+                  <span style="--rot: 0deg; --d: 0.15s"></span>
+                  <span style="--rot: 60deg; --d: 0.35s"></span>
+                  <span style="--rot: 120deg; --d: 0.55s"></span>
+                  <span style="--rot: 180deg; --d: 0.75s"></span>
+                  <span style="--rot: 240deg; --d: 0.95s"></span>
+                  <span style="--rot: 300deg; --d: 1.15s"></span>
+                </div>
+                <div class="creators-card__ring">
+                  <img
+                    class="creators-card__avatar"
+                    src="creators/QingQing.jpg"
+                    width="112"
+                    height="112"
+                    alt=""
+                    decoding="async"
+                  />
+                </div>
+              </div>
+              <span class="creators-card__name creators-card__name--qing">Qing</span>
+              <span class="creators-card__id">创作者编号 001</span>
+            </article>
+          </div>
         </div>
       </div>
     </div>
