@@ -2,181 +2,22 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta
-      name="description"
-      content="年度清单：仓库 data/year-todos.json 与本地勾选；深色极简界面。"
-    />
-    <title>OnlyGuys · 年度清单</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <!-- 用当前页 URL 解析样式路径，避免 Live Preview / 子路径下相对路径失效导致「整页无样式」 -->
-    <link rel="stylesheet" href="" id="__ogTodoStylesheet" media="all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="refresh" content="0; url=index.html#todo" />
+    <title>重定向 · 年度清单</title>
     <script>
       (function () {
-        var el = document.getElementById("__ogTodoStylesheet");
-        if (!el) return;
         try {
-          el.href = new URL("css/styles.css", location.href).href;
+          location.replace(new URL("index.html#todo", location.href).href);
         } catch (e) {
-          el.href = "css/styles.css";
+          location.replace("index.html#todo");
         }
       })();
     </script>
   </head>
-  <body class="theme-guys todo-page">
-    <div class="bg-layer" id="bgLayer" aria-hidden="true"></div>
-    <div class="bg-scrim" aria-hidden="true"></div>
-    <div class="bg-vignette" aria-hidden="true"></div>
-
-    <div class="shell todo-page__shell">
-      <header class="top-bar todo-page__top">
-        <div class="top-bar-left">
-          <button
-            type="button"
-            class="spin-switch"
-            id="modeSpin"
-            aria-label="切换到 OnlyGirls 主题"
-            aria-pressed="false"
-            title="切换 OnlyGuys / OnlyGirls"
-          >
-            <span class="spin-switch__glow" aria-hidden="true"></span>
-            <span class="spin-switch__disc" aria-hidden="true">
-              <svg class="spin-top-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <ellipse cx="20" cy="30" rx="10" ry="4" class="spin-top-svg__shadow" />
-                <path
-                  class="spin-top-svg__body"
-                  d="M20 8 L28 26 Q20 30 12 26 Z"
-                  stroke="currentColor"
-                  stroke-width="0.75"
-                  stroke-opacity="0.4"
-                  stroke-linejoin="round"
-                />
-                <ellipse cx="20" cy="10" rx="3" ry="2" class="spin-top-svg__tip" />
-              </svg>
-            </span>
-          </button>
-          <a class="brand-mark" id="todoPageBrand" href="index.html">OnlyGuys</a>
-        </div>
-        <nav class="top-nav" aria-label="主导航">
-          <a href="index.html">首页</a>
-          <span class="todo-page__nav-current" aria-current="page">年度清单</span>
-        </nav>
-        <button type="button" class="nav-toggle" id="navToggle" aria-label="打开菜单">
-          <span></span><span></span><span></span>
-        </button>
-      </header>
-
-      <div class="mobile-drawer" id="mobileDrawer" hidden>
-        <nav class="drawer-nav">
-          <a href="index.html">首页</a>
-          <span class="todo-page__nav-current">年度清单</span>
-        </nav>
-      </div>
-
-      <main class="todo-page__main">
-        <header class="todo-page__intro">
-          <p class="todo-page__eyebrow">Yearly</p>
-          <h1 class="todo-page__title">年度清单</h1>
-          <p class="todo-page__tagline">正文以仓库 <code class="todo-page__code">data/year-todos.json</code> 为准 · 勾选进度仅保存在本机</p>
-          <div class="todo-page__source-bar">
-            <p class="todo-page__source-status" id="yearTodoSourceStatus" role="status"></p>
-            <button type="button" class="btn btn-ghost btn--todo-sync" id="yearTodoRefetch">从仓库同步</button>
-          </div>
-        </header>
-
-        <details class="todo-page__help">
-          <summary>如何使用（编辑文件 → 推送 → 网页对照）</summary>
-          <div class="todo-page__help-body">
-            <ol>
-              <li>在本地用编辑器打开 <strong>data/year-todos.json</strong>，按年份填写 <code>lists</code>；每条保留稳定 <code>id</code> 字符串，便于本机记住是否勾选。</li>
-              <li>保存后执行 <code>git add data/year-todos.json</code> → <code>git commit</code> → <code>git push</code>。</li>
-              <li>打开已部署的清单页，点 <strong>从仓库同步</strong>（或刷新页面）即可看到最新正文。</li>
-              <li>网页上的增删改、勾选会写入浏览器缓存；与仓库冲突时，以你 <strong>push 的文件</strong> 为准，同步后会合并同 <code>id</code> 的勾选状态。</li>
-              <li>详细说明与云端方案见仓库内 <a href="docs/todo-year-list.md" class="todo-page__inline-link">docs/todo-year-list.md</a>。</li>
-            </ol>
-          </div>
-        </details>
-
-        <div class="todo-notebook" aria-label="年度清单">
-          <div class="todo-notebook__accent" aria-hidden="true"></div>
-          <div class="todo-notebook__inner">
-            <div class="todo-notebook__toolbar">
-              <label class="todo-notebook__field">
-                <span class="todo-notebook__label">年份</span>
-                <select id="yearTodoYearSelect" class="todo-notebook__select" aria-label="选择年份"></select>
-              </label>
-              <div class="todo-notebook__year-add">
-                <input
-                  id="yearTodoNewYear"
-                  class="todo-notebook__input todo-notebook__input--year"
-                  type="number"
-                  min="1970"
-                  max="2100"
-                  step="1"
-                  placeholder="年"
-                  aria-label="要添加的年份"
-                />
-                <button type="button" id="yearTodoAddYear" class="btn btn-ghost btn--notebook">新增年度</button>
-              </div>
-              <button type="button" id="yearTodoDelYear" class="btn btn-ghost btn--notebook btn--danger-soft">
-                删除本年
-              </button>
-            </div>
-
-            <p class="todo-notebook__stats" id="yearTodoStats"></p>
-            <p class="todo-notebook__empty" id="yearTodoEmpty" hidden>暂无条目。可在上方新增年度，或编辑仓库 JSON 后点「从仓库同步」。</p>
-
-            <ul class="todo-notebook__list" id="yearTodoList"></ul>
-
-            <div class="todo-notebook__actions">
-              <button type="button" id="yearTodoAddItem" class="btn btn-primary btn--notebook-add">添加一行</button>
-            </div>
-
-            <div class="todo-notebook__sync">
-              <p class="todo-notebook__sync-title">本地备份</p>
-              <p class="todo-notebook__sync-hint">换设备或清缓存前可导出；若要更新仓库，请把 JSON 覆盖 <code class="todo-page__code">data/year-todos.json</code> 再 push。</p>
-              <div class="todo-notebook__sync-btns">
-                <button type="button" id="yearTodoExport" class="btn btn-ghost btn--notebook">导出 JSON</button>
-                <button type="button" id="yearTodoCopyJson" class="btn btn-ghost btn--notebook">复制 JSON</button>
-                <label class="btn btn-ghost btn--notebook todo-notebook__import-label">
-                  导入 JSON
-                  <input id="yearTodoImport" type="file" accept="application/json,.json" class="todo-notebook__import-input" />
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-
-      <footer class="site-footer todo-page__footer">
-        <div class="footer-strip of-strip" aria-hidden="true"></div>
-        <div class="footer-inner">
-          <a class="footer-brand" href="index.html" id="footerBrandLink">OnlyGuys</a>
-          <span class="footer-meta">© 2026 · <a href="index.html">返回首页</a></span>
-        </div>
-      </footer>
-    </div>
-
-    <script>
-      (function () {
-        function load(src) {
-          var s = document.createElement("script");
-          s.defer = true;
-          try {
-            s.src = new URL(src, location.href).href;
-          } catch (e) {
-            s.src = src;
-          }
-          document.body.appendChild(s);
-        }
-        load("js/todo-page.js");
-        load("js/year-todos.js");
-      })();
-    </script>
+  <body>
+    <p style="font-family: system-ui, sans-serif; padding: 1.5rem">
+      <a href="index.html#todo">年度清单已并入首页弹层，点此跳转…</a>
+    </p>
   </body>
 </html>

@@ -10,6 +10,7 @@
   const modalDiscover = document.getElementById("modalDiscover");
   const modalCreators = document.getElementById("modalCreators");
   const modalAbout = document.getElementById("modalAbout");
+  const modalTodo = document.getElementById("modalTodo");
   const modalSupport = document.getElementById("modalSupport");
   const discoverModalLead = document.getElementById("discoverModalLead");
 
@@ -113,7 +114,7 @@
   }
 
   function closeModals() {
-    [modalDiscover, modalSupport, modalCreators, modalAbout].forEach(function (el) {
+    [modalDiscover, modalSupport, modalCreators, modalTodo, modalAbout].forEach(function (el) {
       if (!el) return;
       el.classList.remove("site-modal--visible");
       el.setAttribute("hidden", "");
@@ -150,6 +151,10 @@
     openModal(modalSupport);
   }
 
+  function openTodoModal() {
+    openModal(modalTodo);
+  }
+
   document.querySelectorAll(".nav-modal-trigger[data-open-modal]").forEach(function (node) {
     node.addEventListener("click", function (e) {
       e.preventDefault();
@@ -159,6 +164,7 @@
       if (which === "discover") openDiscoverModal();
       else if (which === "support") openSupportModal();
       else if (which === "creators") openCreatorsModal();
+      else if (which === "todo") openTodoModal();
       else if (which === "about") openAboutModal();
     });
   });
@@ -186,6 +192,13 @@
   });
 
   loadSavedTheme();
+
+  if (location.hash === "#todo") {
+    openTodoModal();
+  }
+  window.addEventListener("hashchange", function () {
+    if (location.hash === "#todo") openTodoModal();
+  });
 
   navToggle?.addEventListener("click", function () {
     if (!mobileDrawer) return;

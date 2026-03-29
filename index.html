@@ -90,8 +90,8 @@
           <a href="#" class="nav-modal-trigger" data-open-modal="creators">创作者</a>
           <a href="#">订阅</a>
           <a href="#" class="nav-modal-trigger" data-open-modal="support">看世界</a>
+          <a href="#" class="nav-modal-trigger" data-open-modal="todo">清单</a>
           <a href="#" class="nav-modal-trigger" data-open-modal="about">关于</a>
-          <a href="todo.html">清单</a>
         </nav>
         <div class="top-actions">
           <button type="button" class="btn btn-ghost">登录</button>
@@ -108,8 +108,8 @@
           <a href="#" class="nav-modal-trigger" data-open-modal="creators">创作者</a>
           <a href="#">订阅</a>
           <a href="#" class="nav-modal-trigger" data-open-modal="support">看世界</a>
+          <a href="#" class="nav-modal-trigger" data-open-modal="todo">清单</a>
           <a href="#" class="nav-modal-trigger" data-open-modal="about">关于</a>
-          <a href="todo.html">清单</a>
           <button type="button" class="btn btn-ghost btn-block">登录</button>
           <button type="button" class="btn btn-primary btn-block">免费加入</button>
         </nav>
@@ -330,6 +330,111 @@
       </div>
     </div>
 
+    <!-- 弹出卡片：年度清单（同页打开，无整页跳转） -->
+    <div
+      class="site-modal"
+      id="modalTodo"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="todo-modal-title"
+      aria-hidden="true"
+      hidden
+    >
+      <button type="button" class="site-modal__backdrop" tabindex="-1" aria-label="关闭" data-close-modal></button>
+      <div class="site-modal__sheet">
+        <div class="site-modal__panel site-modal__panel--todo">
+          <button type="button" class="site-modal__close" data-close-modal aria-label="关闭">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <p class="site-modal__eyebrow" id="todo-modal-title">年度清单</p>
+          <div class="todo-page__main todo-page__main--modal">
+            <header class="todo-page__intro">
+              <p class="todo-page__tagline">
+                正文以仓库 <code class="todo-page__code">data/year-todos.json</code> 为准 · 勾选进度仅保存在本机
+              </p>
+              <div class="todo-page__source-bar">
+                <p class="todo-page__source-status" id="yearTodoSourceStatus" role="status"></p>
+                <button type="button" class="btn btn-ghost btn--todo-sync" id="yearTodoRefetch">从仓库同步</button>
+              </div>
+            </header>
+
+            <details class="todo-page__help">
+              <summary>如何使用（编辑文件 → 推送 → 网页对照）</summary>
+              <div class="todo-page__help-body">
+                <ol>
+                  <li>在本地用编辑器打开 <strong>data/year-todos.json</strong>，按年份填写 <code>lists</code>；每条保留稳定 <code>id</code> 字符串，便于本机记住是否勾选。</li>
+                  <li>保存后执行 <code>git add data/year-todos.json</code> → <code>git commit</code> → <code>git push</code>。</li>
+                  <li>在首页点 <strong>清单</strong> 打开此弹层，点 <strong>从仓库同步</strong>（或下次打开页面前已自动拉取）即可看到最新正文。</li>
+                  <li>网页上的增删改、勾选会写入浏览器缓存；与仓库冲突时，以你 <strong>push 的文件</strong> 为准，同步后会合并同 <code>id</code> 的勾选状态。</li>
+                  <li>详细说明与云端方案见仓库内 <a href="docs/todo-year-list.md" class="todo-page__inline-link">docs/todo-year-list.md</a>。</li>
+                </ol>
+              </div>
+            </details>
+
+            <div class="todo-notebook" aria-label="年度清单">
+              <div class="todo-notebook__accent" aria-hidden="true"></div>
+              <div class="todo-notebook__inner">
+                <div class="todo-notebook__toolbar">
+                  <label class="todo-notebook__field">
+                    <span class="todo-notebook__label">年份</span>
+                    <select id="yearTodoYearSelect" class="todo-notebook__select" aria-label="选择年份"></select>
+                  </label>
+                  <div class="todo-notebook__year-add">
+                    <input
+                      id="yearTodoNewYear"
+                      class="todo-notebook__input todo-notebook__input--year"
+                      type="number"
+                      min="1970"
+                      max="2100"
+                      step="1"
+                      placeholder="年"
+                      aria-label="要添加的年份"
+                    />
+                    <button type="button" id="yearTodoAddYear" class="btn btn-ghost btn--notebook">新增年度</button>
+                  </div>
+                  <button type="button" id="yearTodoDelYear" class="btn btn-ghost btn--notebook btn--danger-soft">
+                    删除本年
+                  </button>
+                </div>
+
+                <p class="todo-notebook__stats" id="yearTodoStats"></p>
+                <p class="todo-notebook__empty" id="yearTodoEmpty" hidden>
+                  暂无条目。可在上方新增年度，或编辑仓库 JSON 后点「从仓库同步」。
+                </p>
+
+                <ul class="todo-notebook__list" id="yearTodoList"></ul>
+
+                <div class="todo-notebook__actions">
+                  <button type="button" id="yearTodoAddItem" class="btn btn-primary btn--notebook-add">添加一行</button>
+                </div>
+
+                <div class="todo-notebook__sync">
+                  <p class="todo-notebook__sync-title">本地备份</p>
+                  <p class="todo-notebook__sync-hint">
+                    换设备或清缓存前可导出；若要更新仓库，请把 JSON 覆盖
+                    <code class="todo-page__code">data/year-todos.json</code> 再 push。
+                  </p>
+                  <div class="todo-notebook__sync-btns">
+                    <button type="button" id="yearTodoExport" class="btn btn-ghost btn--notebook">导出 JSON</button>
+                    <button type="button" id="yearTodoCopyJson" class="btn btn-ghost btn--notebook">复制 JSON</button>
+                    <label class="btn btn-ghost btn--notebook todo-notebook__import-label">
+                      导入 JSON
+                      <input
+                        id="yearTodoImport"
+                        type="file"
+                        accept="application/json,.json"
+                        class="todo-notebook__import-input"
+                      />
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- 弹出卡片：关于 -->
     <div
       class="site-modal"
@@ -361,6 +466,7 @@
     </div>
 
     <script src="js/gallery-carousel.js" defer></script>
+    <script src="js/year-todos.js" defer></script>
     <script src="js/app.js" defer></script>
     <script src="js/travel-map.js" defer></script>
     <!-- 与 content/about.md 保持一致；file:// 双击打开或 fetch 失败时使用 -->

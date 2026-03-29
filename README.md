@@ -39,7 +39,7 @@ python -m http.server 8080
 - 首页超大标题 **OnlyGuys / OnlyGirls**（Bebas Neue），点击左上角**陀螺开关**切换主题；陀螺默认慢旋，切入 Girls 时变红、加速旋转并散发爱心。
 - 整体视觉**偏 OnlyFans 系**；全屏背景由 **`onlyGuysPic/cv.jpg` / `onlyGirlsPic/Qing.jpg`** 与 **图库轮播层**（`js/gallery-manifest.json`）叠色融合；访客不能改服务器上的文件。
 - **访客评论**：集成 **Giscus**（GitHub Discussions）。需在 `giscus-config.js` 中填写仓库信息并设 `enabled: true`。
-- **年度清单**：打开 **`todo.html`**；正文以仓库 **`data/year-todos.json`** 为准（本地编辑后 `git push`，网页自动拉取或点「从仓库同步」）；勾选完成状态保存在浏览器，详见 **`docs/todo-year-list.md`**。
+- **年度清单**：顶栏 **清单** 在首页以 **弹层** 打开（无整页跳转）；正文以 **`data/year-todos.json`** 为准（`git push` 后点「从仓库同步」）；勾选状态在浏览器 **`localStorage`**。旧书签 **`todo.html`** 会重定向到 **`index.html#todo`**。详见 **`docs/todo-year-list.md`**。
 
 ## 操作手册（部署与评论，一步一步）
 
@@ -68,8 +68,7 @@ js/gallery-carousel.js
 js/travel-map.js     ← 「看世界」弹层内「看世界打卡」地图（中国/世界切换、城市经纬度）
 js/about-loader.js
 js/giscus-loader.js
-js/todo-page.js
-js/year-todos.js
+js/year-todos.js     ← 年度清单逻辑（首页 #modalTodo 内）
 docs/
   design.md
   operations-manual.md

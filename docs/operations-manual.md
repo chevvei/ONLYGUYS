@@ -117,9 +117,9 @@
 
 ---
 
-## 年度清单（`todo.html`）与「同步到远端」
+## 年度清单（首页弹层）与「同步到远端」
 
-清单 **正文** 请维护仓库 **`data/year-todos.json`**，保存后 `git push`，在 **`todo.html`** 点 **从仓库同步** 或刷新即可对照浏览；**勾选状态** 仍在浏览器 **localStorage**。备份整份可用页面 **导出 / 导入 JSON**；云端方案见 **`docs/todo-year-list.md`**。
+清单 **正文** 请维护仓库 **`data/year-todos.json`**，保存后 `git push`，在首页点 **清单** 打开弹层后点 **从仓库同步**（进入首页时脚本也会自动拉取）；**勾选状态** 仍在浏览器 **localStorage**。备份可用弹层内 **导出 / 导入 JSON**；云端方案见 **`docs/todo-year-list.md`**。旧链接 **`todo.html`** 会跳到 **`index.html#todo`** 并自动打开弹层。
 
 ---
 
