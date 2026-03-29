@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-03-28（第二十次更新）
+
+- **标题字与轮播同步**：新增 CSS 变量 **`--hero-title-photo`**（默认等同 `--hero-photo`），`.hero-title__text` 改用该变量；**`gallery-carousel.js`** 在每张**图片**幻灯片载入后把 `--hero-title-photo` 设为当前图 URL，**视频**段与无轮播时 `removeProperty` 回退主题主图。`.bg-layer` 仍固定 `--hero-photo`，仅轮播层与标题纹理跟图走。
+
+## 2026-03-28（第十九次更新）
+
+- **留言区位置**：`#comments` 从 `main` 内移至 **页脚之后**，首屏以 Hero + 背景图为主；Hero 增加 **`min-height: calc(100svh - 4.75rem)`**（含 `100dvh` 回退），评论区增加顶部分割线与轻渐变区隔。`docs/design.md` 同步。
+
 ## 2026-03-28（第十八次更新）
 
 - **主图路径**：`cv.jpg` / `Qing.jpg` 改放在 **`onlyGuysPic/`**、**`onlyGirlsPic/`** 后，更新 **`css/styles.css`** 中 `--hero-photo` 为 `../onlyGuysPic/cv.jpg` 与 `../onlyGirlsPic/Qing.jpg`；修正 **`gallery-manifest.json`**（补逗号并与当前文件夹内文件一致）；README / `docs/gallery-media.md` / `docs/design.md` / 两图库 README 同步说明。

@@ -17,11 +17,11 @@
 | 主 CTA   | **青蓝渐变**按钮 + 轻微光晕（OnlyFans 系常见强调色）。                                                                                                                                                        |
 | 主标题     | **Bebas Neue** 超大字重 + 白→灰→青蓝纵向渐变 + 投影。                                                                                                                                                     |
 | 背景      | 底层全屏 **`onlyGuysPic/cv.jpg`** / **`onlyGirlsPic/Qing.jpg`**（主题切换，`--hero-photo`）；其上有 **`gallery-carousel`** 轮播层（清单见 `js/gallery-manifest.json`），有素材时略压低底层透明度；**scrim** 与 **vignette** 叠在最上，与 UI 融合。 |
-| 主标题字    | 与背景**同一 `--hero-photo`**，双层 `background-image`（渐变罩 + 照片）+ `background-clip: text`，与页面背景对齐。                                                                                                 |
+| 主标题字    | 双层 `background-image`（渐变罩 + **`--hero-title-photo`**）+ `background-clip: text`；有图库轮播且当前为**图片**时由 JS 与幻灯片同步，否则与主题主图 `--hero-photo` 一致。                                                                                    |
 | 主题开关    | 左上角圆形 **陀螺** SVG，慢旋；OnlyGirls 态红粉描边/光晕、快旋，点击切换时 **爱心粒子** 外散。                                                                                                                               |
 | 发现 / 关于 | 点击顶栏或抽屉链接后 **弹出层**（磨砂遮罩 + 渐变顶线卡片）；发现文案随 Guys/Girls 主题切换；关于内容来自 `**content/about.md`** + **双行计时器**（第一行 `since` 相识累计；第二行 `since_near` 未到为倒计时、过后为「想靠近你的第…」累计），每秒同步刷新。                         |
 | 内容区     | 半透明毛玻璃面板（`backdrop-filter`），避免背景图干扰控件阅读。                                                                                                                                                   |
-| 评论区     | 与主面板一致的圆角容器，便于嵌入 Giscus（`dark` 主题）。                                                                                                                                                        |
+| 评论区     | 与主面板一致的圆角容器（Giscus `dark`）；**在页脚下方**，首屏不展示，向下滚动后再进入留言。                                                                                                                                   |
 | 页脚      | **细青蓝渐变线** + 深色底栏，与顶栏色系一致。                                                                                                                                                                 |
 
 

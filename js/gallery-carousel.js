@@ -69,6 +69,21 @@
     document.body.classList.toggle("has-gallery-slides", on);
   }
 
+  /** 标题字纹理与轮播当前图同步（底图 .bg-layer 仍用 CSS 的 --hero-photo） */
+  function resetHeroTitlePhoto() {
+    if (document.body) {
+      document.body.style.removeProperty("--hero-title-photo");
+    }
+  }
+
+  function setHeroTitlePhotoFromUrl(fullUrl) {
+    if (!document.body || !fullUrl) return;
+    document.body.style.setProperty(
+      "--hero-title-photo",
+      "url(" + JSON.stringify(String(fullUrl)) + ")"
+    );
+  }
+
   function preloadAt(i) {
     if (!list.length) return;
     var next = list[i % list.length];
@@ -90,6 +105,7 @@
     carousel.hidden = true;
     carousel.setAttribute("aria-hidden", "true");
     setGalleryActive(false);
+    resetHeroTitlePhoto();
   }
 
   function showSlide(i) {
@@ -107,6 +123,7 @@
     preloadAt(index + 1);
 
     if (isVid) {
+      resetHeroTitlePhoto();
       imgEl.classList.remove("is-visible");
       imgEl.removeAttribute("src");
       videoEl.classList.remove("is-visible");
@@ -155,6 +172,7 @@
         if (gen !== slideGen) return;
         imgEl.onload = null;
         imgEl.onerror = null;
+        setHeroTitlePhotoFromUrl(full);
         imgEl.classList.add("is-visible");
         timerId = window.setTimeout(function () {
           if (gen !== slideGen) return;
@@ -172,6 +190,7 @@
       if (imgEl.complete && imgEl.naturalWidth > 0) {
         imgEl.onload = null;
         imgEl.onerror = null;
+        setHeroTitlePhotoFromUrl(full);
         imgEl.classList.add("is-visible");
         timerId = window.setTimeout(function () {
           if (gen !== slideGen) return;

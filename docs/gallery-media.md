@@ -3,6 +3,8 @@
 全站底图与标题字纹理使用 **`onlyGuysPic/cv.jpg`**（Guys）与 **`onlyGirlsPic/Qing.jpg`**（Girls），由 `css/styles.css` 中 **`--hero-photo`** 指向。  
 同一文件夹内其他素材由 **`js/gallery-manifest.json`** 列出后**循环轮播**叠在底图之上（图片约 6.5s / 张，视频播完或最长约 2 分钟后切下一项）。主图通常也写在 manifest 第一项，与底图同源。
 
+**标题字纹理**：`OnlyGuys` / `OnlyGirls` 大标题的 `background-clip` 使用 CSS 变量 **`--hero-title-photo`**。有轮播且当前张为**图片**时，由 `gallery-carousel.js` 将其设为当前幻灯片地址，与轮播同步；当前张为**视频**或未开轮播时，回退为与 **`--hero-photo`** 相同（即 `onlyGuysPic/cv.jpg` / `onlyGirlsPic/Qing.jpg`）。全屏底层 `.bg-layer` 始终只用 `--hero-photo`，不因轮播改图。
+
 ## 目录
 
 | 文件夹 | 主题 | 支持格式 |

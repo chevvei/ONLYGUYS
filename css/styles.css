@@ -11,6 +11,8 @@
   --border: rgba(255, 255, 255, 0.09);
   --hero-opacity: 0.38;
   --hero-photo: url("../onlyGuysPic/cv.jpg");
+  /* 标题字纹理：默认同底图；轮播时由 JS 改为当前幻灯片 */
+  --hero-title-photo: var(--hero-photo);
   --title-shade-top: rgba(255, 255, 255, 0.9);
   --title-shade-mid: rgba(226, 232, 240, 0.45);
   --title-shade-bot: rgba(0, 175, 240, 0.35);
@@ -24,6 +26,7 @@ body.theme-girls {
   --accent-glow: rgba(255, 77, 109, 0.45);
   --accent-soft: rgba(255, 77, 109, 0.14);
   --hero-photo: url("../onlyGirlsPic/Qing.jpg");
+  --hero-title-photo: var(--hero-photo);
   --title-shade-top: rgba(255, 250, 252, 0.92);
   --title-shade-mid: rgba(255, 182, 193, 0.42);
   --title-shade-bot: rgba(225, 29, 72, 0.4);
@@ -575,6 +578,10 @@ body.theme-girls .spin-switch__disc {
   max-width: 56rem;
   margin: 0 auto;
   width: 100%;
+  /* 首屏以主视觉为主，避免留言区与评论区同屏抢画面 */
+  min-height: calc(100vh - 4.75rem);
+  min-height: calc(100dvh - 4.75rem);
+  min-height: calc(100svh - 4.75rem);
 }
 
 .hero-eyebrow {
@@ -606,7 +613,7 @@ body.theme-girls .spin-switch__disc {
       var(--title-shade-mid) 42%,
       var(--title-shade-bot) 100%
     ),
-    var(--hero-photo);
+    var(--hero-title-photo);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -923,14 +930,16 @@ body.theme-girls .spin-switch__disc {
   text-shadow: 0 0 24px var(--accent-glow);
 }
 
-/* —— 评论区 —— */
+/* —— 评论区（置于页脚之后，需向下滚动查看） —— */
 .comments-section {
   width: 100%;
   max-width: 52rem;
   margin: 0 auto;
-  padding: 0 1.25rem 2.5rem;
+  padding: 2.25rem 1.25rem 3rem;
   text-align: left;
   flex-shrink: 0;
+  border-top: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0%, transparent 55%);
 }
 
 .comments-heading {
@@ -972,6 +981,7 @@ body.theme-girls .spin-switch__disc {
 /* —— 页脚：细青蓝条 —— */
 .site-footer {
   margin-top: auto;
+  flex-shrink: 0;
 }
 
 .of-strip {
