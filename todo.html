@@ -14,7 +14,19 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/styles.css" />
+    <!-- 用当前页 URL 解析样式路径，避免 Live Preview / 子路径下相对路径失效导致「整页无样式」 -->
+    <link rel="stylesheet" href="" id="__ogTodoStylesheet" media="all" />
+    <script>
+      (function () {
+        var el = document.getElementById("__ogTodoStylesheet");
+        if (!el) return;
+        try {
+          el.href = new URL("css/styles.css", location.href).href;
+        } catch (e) {
+          el.href = "css/styles.css";
+        }
+      })();
+    </script>
   </head>
   <body class="theme-guys todo-page">
     <div class="bg-layer" id="bgLayer" aria-hidden="true"></div>
@@ -150,7 +162,21 @@
       </footer>
     </div>
 
-    <script src="js/todo-page.js" defer></script>
-    <script src="js/year-todos.js" defer></script>
+    <script>
+      (function () {
+        function load(src) {
+          var s = document.createElement("script");
+          s.defer = true;
+          try {
+            s.src = new URL(src, location.href).href;
+          } catch (e) {
+            s.src = src;
+          }
+          document.body.appendChild(s);
+        }
+        load("js/todo-page.js");
+        load("js/year-todos.js");
+      })();
+    </script>
   </body>
 </html>

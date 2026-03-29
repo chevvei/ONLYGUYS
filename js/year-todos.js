@@ -1,6 +1,12 @@
 (function () {
   var STORAGE_KEY = "onlyguys_year_todos_v1";
-  var REPO_JSON = "data/year-todos.json";
+  var REPO_JSON = (function () {
+    try {
+      return new URL("data/year-todos.json", location.href).href;
+    } catch (e) {
+      return "data/year-todos.json";
+    }
+  })();
 
   function uid() {
     return "t" + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
