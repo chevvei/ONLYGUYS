@@ -10,6 +10,7 @@
   const modalDiscover = document.getElementById("modalDiscover");
   const modalCreators = document.getElementById("modalCreators");
   const modalAbout = document.getElementById("modalAbout");
+  const modalSupport = document.getElementById("modalSupport");
   const discoverModalLead = document.getElementById("discoverModalLead");
 
   const STORAGE_THEME = "onlyguys_theme";
@@ -112,7 +113,7 @@
   }
 
   function closeModals() {
-    [modalDiscover, modalCreators, modalAbout].forEach(function (el) {
+    [modalDiscover, modalSupport, modalCreators, modalAbout].forEach(function (el) {
       if (!el) return;
       el.classList.remove("site-modal--visible");
       el.setAttribute("hidden", "");
@@ -145,6 +146,10 @@
     openModal(modalAbout);
   }
 
+  function openSupportModal() {
+    openModal(modalSupport);
+  }
+
   document.querySelectorAll(".nav-modal-trigger[data-open-modal]").forEach(function (node) {
     node.addEventListener("click", function (e) {
       e.preventDefault();
@@ -152,6 +157,7 @@
       const which = node.getAttribute("data-open-modal");
       closeDrawer();
       if (which === "discover") openDiscoverModal();
+      else if (which === "support") openSupportModal();
       else if (which === "creators") openCreatorsModal();
       else if (which === "about") openAboutModal();
     });

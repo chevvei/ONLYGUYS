@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-03-29（第三十四次更新）
+
+- **众筹看世界**：顶栏 **订阅右侧** 增加入口，弹层 **`#modalSupport`** 展示微信收款码；图片统一放在 **`assets/support/wechat-pay.jpg`**（已将根目录 `paycv.jpg` 移入并更名），目录说明见 **`assets/support/README.md`**、**`docs/support-assets.md`**。
+- **页脚**：**「版权所有」** 写入 **`© 2026 南山第一深情CV · 版权所有 · 静态托管`**。
+
+## 2026-03-28（第三十三次更新）
+
+- **页脚版权**：`© 演示站点` 改为 **`© 2026 南山第一深情CV · 静态托管`**（`index.html` 页脚 `.footer-meta`）。
+
 ## 2026-03-28（第三十二次更新）
 
 - **关于页「乱码」**：若 `about.md` 被编辑器在文首插入 **`<!-- ... -->`**（如 koroFileHeader），原解析会失败、YAML 与注释会整段进正文。**`about-loader.js`** 在解析前 **剥离文首 HTML 注释与 BOM**；`docs/editing-about.md` 补充勿对 `.md` 写 HTML 文件头的说明。

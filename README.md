@@ -52,6 +52,7 @@ index.html
 onlyGuysPic/        ← 含 cv.jpg（Guys 底图 + 可轮播）
 onlyGirlsPic/       ← 含 Qing.jpg（Girls 底图 + 可轮播）
 creators/           ← 「创作者」弹层头像（cvcv.jpg、QingQing.jpg）
+assets/support/     ← 「众筹看世界」微信收款码等（默认 wechat-pay.jpg，见目录内 README）
 giscus-config.js    ← Giscus 开关与 ID（按手册填写）
 content/about.md    ← 「关于」正文与双行计时器配置（部署后以此为准；请与 index 内 #about-md-fallback 同步）
 css/styles.css
@@ -65,6 +66,7 @@ docs/
   operations-manual.md
   editing-about.md
   gallery-media.md  ← 图库与 manifest 说明
+  support-assets.md ← 众筹收款码目录与扩展说明
 changelog.md
 ```
 
