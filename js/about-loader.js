@@ -49,10 +49,22 @@
       .join("<br>");
   }
 
+  /** 去掉 BOM、连续的文首 HTML 注释（如 koroFileHeader 误写入 .md），避免破坏 front matter */
+  function stripAboutLeadingNoise(raw) {
+    var s = String(raw).replace(/^\uFEFF/, "");
+    var prev;
+    do {
+      prev = s;
+      s = s.replace(/^\s*<!--[\s\S]*?-->\s*/, "");
+    } while (s !== prev);
+    return s.trim();
+  }
+
   function parseFrontMatter(text) {
-    var m = String(text).match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*\r?\n([\s\S]*)$/);
+    var cleaned = stripAboutLeadingNoise(text);
+    var m = cleaned.match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*\r?\n([\s\S]*)$/);
     if (!m) {
-      return { meta: {}, body: String(text).trim() };
+      return { meta: {}, body: cleaned };
     }
     var meta = {};
     m[1].split(/\r?\n/).forEach(function (line) {
@@ -155,23 +167,50 @@
   function showFetchError() {
     if (!bodyEl) return;
     bodyEl.innerHTML =
-      "<p class=\"about-fallback\">无法加载 <code>content/about.md</code>。若你是本地双击打开的页面，请用 <code>npx serve .</code> 启动静态服务后再试。</p>" +
-      "<p class=\"about-fallback about-fallback--hint\">若已部署到 GitHub Pages：请确认仓库根目录有 <code>content/about.md</code>，且根目录存在 <code>.nojekyll</code> 文件（避免 Jekyll 吞掉该文件），然后重新推送并等待几分钟。</p>" +
-      "<p class=\"about-fallback about-fallback--hint\">编辑正文：仓库内 <code>content/about.md</code>，说明见 <code>docs/editing-about.md</code>。</p>";
+      "<p class=\"about-fallback\">无法加载 <code>content/about.md</code>，且页面内未提供备用正文。若你是本地预览，请用 <code>npx serve .</code> 启动静态服务；或向 <code>index.html</code> 中的 <code>#about-md-fallback</code> 填入与 <code>content/about.md</code> 相同的内容。</p>" +
+      "<p class=\"about-fallback about-fallback--hint\">若已部署到 GitHub Pages：请确认仓库根目录有 <code>content/about.md</code>，且根目录存在 <code>.nojekyll</code> 文件，然后重新推送并等待几分钟。</p>" +
+      "<p class=\"about-fallback about-fallback--hint\">编辑说明见 <code>docs/editing-about.md</code>。</p>";
   }
 
-  fetch(ABOUT_URL)
-    .then(function (res) {
-      if (!res.ok) throw new Error(String(res.status));
-      return res.text();
-    })
-    .then(function (text) {
-      var parsed = parseFrontMatter(text);
-      renderBody(parsed.body);
-      startTimers(parsed.meta);
-    })
-    .catch(function () {
+  function getFallbackMarkdown() {
+    var el = document.getElementById("about-md-fallback");
+    if (!el || !el.textContent) return "";
+    return String(el.textContent).replace(/^\uFEFF/, "").trim();
+  }
+
+  function applyAboutMarkdown(text) {
+    var parsed = parseFrontMatter(text);
+    renderBody(parsed.body);
+    startTimers(parsed.meta);
+  }
+
+  var isFileProtocol = window.location.protocol === "file:";
+
+  if (isFileProtocol) {
+    var fbFile = getFallbackMarkdown();
+    if (fbFile) {
+      applyAboutMarkdown(fbFile);
+    } else {
       showFetchError();
       startTimers({});
-    });
+    }
+  } else {
+    fetch(ABOUT_URL)
+      .then(function (res) {
+        if (!res.ok) throw new Error(String(res.status));
+        return res.text();
+      })
+      .then(function (text) {
+        applyAboutMarkdown(text);
+      })
+      .catch(function () {
+        var fb = getFallbackMarkdown();
+        if (fb) {
+          applyAboutMarkdown(fb);
+        } else {
+          showFetchError();
+          startTimers({});
+        }
+      });
+  }
 })();

@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-03-28（第三十二次更新）
+
+- **关于页「乱码」**：若 `about.md` 被编辑器在文首插入 **`<!-- ... -->`**（如 koroFileHeader），原解析会失败、YAML 与注释会整段进正文。**`about-loader.js`** 在解析前 **剥离文首 HTML 注释与 BOM**；`docs/editing-about.md` 补充勿对 `.md` 写 HTML 文件头的说明。
+
+## 2026-03-28（第三十一次更新）
+
+- **关于页 `file://` 可加载**：在 `index.html` 增加 **`#about-md-fallback`**（`text/plain`），内容与 `content/about.md` 同步；**`about-loader.js`** 在 **`file://`** 下直接使用备用正文，在 **http(s)** 下 **fetch 失败时回退**；更新 `docs/editing-about.md` 说明须双处同步。
+
 ## 2026-03-28（第三十次更新）
 
 - **创作者光带左右对称**：中间列 **左右等宽内边距**；网格 **列间距略增**；光带容器 **略窄** 并加 **水平 padding**；**蓝波** 起点更靠左、右端位移缩短，**红波** 起止内收，减少 blur 贴右侧头像而左侧显远的不对称感，两侧均保留 **小缝隙**。

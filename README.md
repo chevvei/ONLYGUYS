@@ -16,6 +16,8 @@ python -m http.server 8080
 
 在浏览器访问提示的本地地址。
 
+**直接双击 `index.html` 也可以**：「关于」会使用页面内 **`#about-md-fallback`** 的备用正文（与 `content/about.md` 一致）；部署到网站后仍以 **`content/about.md`** 为准，改文案时请两处同步（见 `docs/editing-about.md`）。
+
 ## 部署到 GitHub Pages
 
 1. 在 GitHub 新建仓库，将本仓库内容推送上去。
@@ -51,7 +53,7 @@ onlyGuysPic/        ← 含 cv.jpg（Guys 底图 + 可轮播）
 onlyGirlsPic/       ← 含 Qing.jpg（Girls 底图 + 可轮播）
 creators/           ← 「创作者」弹层头像（cvcv.jpg、QingQing.jpg）
 giscus-config.js    ← Giscus 开关与 ID（按手册填写）
-content/about.md    ← 「关于」正文与双行计时器配置（日常只改这个即可）
+content/about.md    ← 「关于」正文与双行计时器配置（部署后以此为准；请与 index 内 #about-md-fallback 同步）
 css/styles.css
 js/app.js
 js/gallery-manifest.json   ← 两主题轮播文件列表

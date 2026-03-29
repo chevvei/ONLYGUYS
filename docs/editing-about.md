@@ -11,6 +11,8 @@
 content/about.md
 ```
 
+**请勿**在 `about.md` 顶部插入 **HTML 注释**（例如 koroFileHeader 的 `<!-- @Author ... -->`）。注释在文件最前时，页面无法识别 YAML，会把整段配置当成正文显示成「乱码」。若已安装该插件，请对该文件**关闭**自动文件头，或把模板改为仅用于 `.js` / `.ts` 等扩展名。
+
 ---
 
 ## 文件结构（两段）
@@ -63,9 +65,18 @@ timer_lead_near_wait: 距离想靠近你的起点还有
 
 ---
 
-## 本地预览注意
+## 本地预览（`file://` 也可）
 
-`about.md` 由浏览器 **fetch** 加载。若你是直接双击打开 `index.html`（`file://`），有时会加载失败。请用静态服务器打开项目根目录，例如：
+`about.md` 正常由浏览器 **fetch** 加载。直接双击 `index.html`（`file://`）时，多数浏览器**不允许**跨文件 fetch，过去会加载失败。
+
+**解决办法**：`index.html` 里已内嵌 **`#about-md-fallback`**（`type="text/plain"` 的 `<script>`），内容与 **`content/about.md` 同步备份**。脚本会：
+
+- **`file://`**：直接使用该备用正文，无需本地服务器；
+- **`http(s)`**：先请求 `content/about.md`，失败时（例如路径错误）再回退到备用正文。
+
+改文案时请**同时更新** `content/about.md` 与 `index.html` 中 `#about-md-fallback` 块，避免线上与双击预览不一致。
+
+仍可用静态服务器只依赖单一文件（可选）：
 
 ```bash
 npx --yes serve .
@@ -91,5 +102,5 @@ GitHub Pages 默认会用 **Jekyll** 构建站点，可能导致 `content/about.
 
 | 文件 | 作用 |
 |------|------|
-| `js/about-loader.js` | 拉取 `content/about.md`、解析 front matter、渲染正文、每秒刷新两行计时器 |
-| `index.html` | 弹出层 `#modalAbout`；`#aboutTimer` / `#aboutTimerNear`；两行备用时间属性 |
+| `js/about-loader.js` | 拉取 `content/about.md`（或 `file://` / 失败时用 `#about-md-fallback`）、解析 front matter、渲染正文、每秒刷新两行计时器 |
+| `index.html` | 弹出层 `#modalAbout`；`#aboutTimer` / `#aboutTimerNear`；两行备用时间属性；**`#about-md-fallback`** 内嵌与 `about.md` 一致的备用正文 |

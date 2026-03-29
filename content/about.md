@@ -6,7 +6,7 @@ timer_lead_near: 想靠近你的第
 timer_lead_near_wait: 这是想靠近你的第
 ---
 
-本站由 **cv** 创作，记录关于我和我的女孩Qing的一切。
+本站由 **cv** 创作，记录和Qing的一切。
 
 把想对 Qing 说的话、日常碎片都写在这里
 
