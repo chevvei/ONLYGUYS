@@ -15,6 +15,17 @@
   </head>
   <body class="theme-guys">
     <div class="bg-layer" id="bgLayer" aria-hidden="true"></div>
+    <div class="gallery-carousel" id="galleryCarousel" hidden aria-hidden="true">
+      <img id="galleryCarouselImg" class="gallery-carousel__img" alt="" decoding="async" />
+      <video
+        id="galleryCarouselVideo"
+        class="gallery-carousel__video"
+        muted
+        playsinline
+        preload="none"
+        aria-hidden="true"
+      ></video>
+    </div>
     <div class="bg-scrim" aria-hidden="true"></div>
     <div class="bg-vignette" aria-hidden="true"></div>
 
@@ -178,6 +189,7 @@
       </div>
     </div>
 
+    <script src="js/gallery-carousel.js" defer></script>
     <script src="js/app.js" defer></script>
     <script src="js/about-loader.js" defer></script>
     <!-- 必须在 giscus-loader 之前执行，以写入 window.ONLYGUYS_GISCUS -->

@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-03-28（第十八次更新）
+
+- **主图路径**：`cv.jpg` / `Qing.jpg` 改放在 **`onlyGuysPic/`**、**`onlyGirlsPic/`** 后，更新 **`css/styles.css`** 中 `--hero-photo` 为 `../onlyGuysPic/cv.jpg` 与 `../onlyGirlsPic/Qing.jpg`；修正 **`gallery-manifest.json`**（补逗号并与当前文件夹内文件一致）；README / `docs/gallery-media.md` / `docs/design.md` / 两图库 README 同步说明。
+
+## 2026-03-28（第十七次更新）
+
+- **`js/gallery-manifest.json`**：为 **`onlyGirlsPic`** 写入与文件夹内素材对应的路径（`Qing.jpg`、`child.jpg`、`west_restaurant.jpg`、`douzhi.mp4`），OnlyGirls 主题下与 OnlyGuys 同样轮播。
+
+## 2026-03-28（第十六次更新）
+
+- **主题图库轮播**：新增 **`onlyGirlsPic/`**、**`onlyGuysPic/`**（根目录散落的 `jpg`/`mp4` 已归入 `onlyGuysPic`）；**`cv.jpg` / `Qing.jpg` 仍留根目录**作底图与标题纹理。通过 **`js/gallery-manifest.json`** 分别为两主题配置播放列表；**`js/gallery-carousel.js`** 叠在底图之上轮播，切换陀螺时分发 **`onlyguys-theme`** 切换列表。性能：图片预取下一张、视频 `preload="metadata"`、单 img/video 复用、长视频有上限时长；**`body.has-gallery-slides`** 时略压低静态底图透明度。文档见 **`docs/gallery-media.md`**，文件夹内 **`README.md`** 说明维护方式。
+
 ## 2026-03-28（第十五次更新）
 
 - **评论区**：去掉「访客使用 GitHub 账号登录…Giscus…Discussions」说明段，版面更简洁；删除 `.comments-lead` 样式，标题与面板间距由 `.comments-heading` 下边距承担。

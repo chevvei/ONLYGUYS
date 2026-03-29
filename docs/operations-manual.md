@@ -127,6 +127,7 @@
 | 仍显示「评论区尚未启用」占位 | **线上 `giscus-config.js` 未更新或未加载**：先确认已 `git push` 且 Pages 已部署；浏览器 **硬刷新**（Ctrl+Shift+R）或无痕窗口；开发者工具 **Network** 中查看 `giscus-config.js` 是否为 **200**。控制台会有 `[giscus]` 开头的警告说明原因。 |
 | 评论发不出去 | 未登录 GitHub；无仓库讨论权限；分类被删或改名后未更新配置。 |
 | 「关于」正文不显示 / 提示无法加载 | 未把 `content/about.md` 推送到仓库；本地用 `file://` 打开（需 `npx serve .`）；或缺少根目录 **`.nojekyll`** 导致 GitHub Pages 的 Jekyll 未按原样提供该文件。 |
+| 图库不轮播 / 只显示底图 | 对应主题的 `onlyGuysPic` / `onlyGirlsPic` 在 **`js/gallery-manifest.json`** 里为 **`[]`**；路径写错或未推送媒体文件；`gallery-manifest.json` 未部署。见 **`docs/gallery-media.md`**。 |
 
 ---
 
@@ -136,7 +137,8 @@
 |------|------|
 | `giscus-config.js` | Giscus 开关与仓库/分类 ID（由你在第四步填写）。 |
 | `js/giscus-loader.js` | 按配置动态插入 Giscus 脚本。 |
-| `index.html` | 评论区 DOM：`#giscus-mount`；「关于」弹出层：`#modalAbout`（`data-since-fallback` / `data-since-near-fallback` 为两行计时的加载失败备用）。 |
+| `index.html` | 评论区 `#giscus-mount`；关于 `#modalAbout`（`data-since-fallback` / `data-since-near-fallback`）；图库 `#galleryCarousel`。 |
+| `js/gallery-manifest.json` | 两主题轮播文件列表；说明见 **`docs/gallery-media.md`**。 |
 | `content/about.md` | 「关于」正文与**双行**计时器配置；维护说明见 **`docs/editing-about.md`**。 |
 
 更偏视觉方向的说明见 `docs/design.md`。

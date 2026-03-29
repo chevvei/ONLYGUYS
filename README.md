@@ -29,12 +29,13 @@ python -m http.server 8080
 
 ## 资源文件
 
-请将 **`cv.jpg`**（OnlyGuys 主题）与 **`Qing.jpg`**（OnlyGirls 主题）放在仓库**根目录**（与 `index.html` 同级），以便 `css/styles.css` 中的 `url("../cv.jpg")` 等路径在 GitHub Pages 上正确加载。
+- **主题主图**：**`onlyGuysPic/cv.jpg`**（OnlyGuys）与 **`onlyGirlsPic/Qing.jpg`**（OnlyGirls）作为静态底图与标题字纹理（路径在 `css/styles.css` 的 `--hero-photo`）；请保持这两个文件在上述文件夹内，若改名或移动需同步改 CSS。
+- **主题图库轮播**：把更多图片/视频放进 **`onlyGuysPic/`** 或 **`onlyGirlsPic/`**，并在 **`js/gallery-manifest.json`** 里按顺序写好路径；切换陀螺即切换对应列表。说明与性能建议见 **`docs/gallery-media.md`**。
 
 ## 功能说明
 
 - 首页超大标题 **OnlyGuys / OnlyGirls**（Bebas Neue），点击左上角**陀螺开关**切换主题；陀螺默认慢旋，切入 Girls 时变红、加速旋转并散发爱心。
-- 整体视觉**偏 OnlyFans 系**；全屏摄影背景与标题字通过同一图源 + 叠色融合（背景仅由主题切换 `cv.jpg` / `Qing.jpg`，访客不能改服务器上的图）。
+- 整体视觉**偏 OnlyFans 系**；全屏背景由 **`onlyGuysPic/cv.jpg` / `onlyGirlsPic/Qing.jpg`** 与 **图库轮播层**（`js/gallery-manifest.json`）叠色融合；访客不能改服务器上的文件。
 - **访客评论**：集成 **Giscus**（GitHub Discussions）。需在 `giscus-config.js` 中填写仓库信息并设 `enabled: true`。
 
 ## 操作手册（部署与评论，一步一步）
@@ -46,17 +47,22 @@ python -m http.server 8080
 ```
 index.html
 .nojekyll           ← 关闭 GitHub Pages 的 Jekyll，保证 about.md 可加载
+onlyGuysPic/        ← 含 cv.jpg（Guys 底图 + 可轮播）
+onlyGirlsPic/       ← 含 Qing.jpg（Girls 底图 + 可轮播）
 giscus-config.js    ← Giscus 开关与 ID（按手册填写）
 content/about.md    ← 「关于」正文与双行计时器配置（日常只改这个即可）
 css/styles.css
 js/app.js
+js/gallery-manifest.json   ← 两主题轮播文件列表
+js/gallery-carousel.js
 js/about-loader.js
 js/giscus-loader.js
 docs/
   design.md
   operations-manual.md
-  editing-about.md  ← 如何编辑 content/about.md
+  editing-about.md
+  gallery-media.md  ← 图库与 manifest 说明
 changelog.md
 ```
 
-「关于」维护说明见 **`docs/editing-about.md`**。设计说明见 `docs/design.md`。
+「关于」维护说明见 **`docs/editing-about.md`**；图库见 **`docs/gallery-media.md`**。设计说明见 `docs/design.md`。

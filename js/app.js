@@ -81,6 +81,9 @@
     try {
       localStorage.setItem(STORAGE_THEME, girls ? "girls" : "guys");
     } catch (_) {}
+    document.dispatchEvent(
+      new CustomEvent("onlyguys-theme", { detail: { girls: girls } })
+    );
     if (burst) {
       burstHearts();
       pulseSpin();
