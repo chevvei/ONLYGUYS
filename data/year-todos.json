@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "activeYear": "2026",
+  "lists": {
+    "2026": [
+      { "id": "t_2026_grad", "text": "顺利答辩毕业", "done": false },
+      { "id": "t_2026_job", "text": "找一个工作", "done": false },
+      { "id": "t_2026_social", "text": "同城交友", "done": false },
+      { "id": "t_2026_trip", "text": "计划一次旅行", "done": false }
+    ]
+  }
+}
