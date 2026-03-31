@@ -435,6 +435,42 @@
       </div>
     </div>
 
+    <!-- 浮动音乐唱片（全局，可拖拽） -->
+    <div class="music-fab" id="musicFab" aria-label="音乐播放" role="group">
+      <button
+        type="button"
+        class="music-fab__disc"
+        aria-label="播放 / 暂停音乐歌单"
+        title="点击展开当前歌单播放器，可拖拽圆盘移动位置"
+      >
+        <span class="music-fab__disc-inner" aria-hidden="true">
+          <span class="music-fab__disc-ring music-fab__disc-ring--outer"></span>
+          <span class="music-fab__disc-ring music-fab__disc-ring--mid"></span>
+          <span class="music-fab__disc-label">
+            <span class="music-fab__disc-dot"></span>
+          </span>
+        </span>
+      </button>
+      <div class="music-fab__panel">
+        <header class="music-fab__header">
+          <span class="music-fab__title">今日歌单</span>
+          <button type="button" class="music-fab__close" aria-label="收起播放器">×</button>
+        </header>
+        <div class="music-fab__body">
+          <iframe
+            id="musicFabFrame"
+            class="music-fab__frame"
+            title="外部音乐播放（网易云 / QQ）"
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+          ></iframe>
+          <p class="music-fab__hint">
+            实际播放由网易云 / QQ 音乐的网页播放器控制；浏览器可能要求你先点一次播放。
+          </p>
+        </div>
+      </div>
+    </div>
+
     <!-- 弹出卡片：关于 -->
     <div
       class="site-modal"
@@ -469,6 +505,12 @@
     <script src="js/year-todos.js" defer></script>
     <script src="js/app.js" defer></script>
     <script src="js/travel-map.js" defer></script>
+    <script src="js/music-player.js" defer></script>
+    <div class="music-lyric-bar" id="musicLyricBar" aria-live="polite" aria-label="滚动歌词">
+      <div class="music-lyric-bar__track">
+        <p class="music-lyric-bar__line" id="musicLyricLine">Music mood initializing...</p>
+      </div>
+    </div>
     <!-- 与 content/about.md 保持一致；file:// 双击打开或 fetch 失败时使用 -->
     <script type="text/plain" id="about-md-fallback">
 ---
